@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Subscribe — The Question Mark Podcast</title>
+<meta name="description" content="Subscribe to The Question Mark Podcast on your favorite platform.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,wght@0,400;0,500;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/favicon-64.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logotype">
+      <span class="logo-badge"><img src="images/question-mark-logo.jpg" alt=""></span>
+      <span>The Question Mark<span class="mark">.</span></span>
+    </a>
+    <nav class="primary-nav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="episodes.html">Episodes</a></li>
+        <li><a href="submit.html">Submit a Question</a></li>
+        <li><a href="subscribe.html" aria-current="page">Subscribe</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-panel" style="padding:36px 0 30px;">
+    <div class="venetian" aria-hidden="true"></div>
+    <div class="hero-mark-bg" aria-hidden="true" style="font-size:140px;">?</div>
+    <div class="wrap">
+      <p class="eyebrow">Subscribe</p>
+      <h1 style="font-size:clamp(28px,5vw,40px);margin-top:6px;">Listen wherever you already do</h1>
+    </div>
+  </div>
+  <div class="wrap">
+    <p class="lede">New episodes land automatically once you subscribe on any of these.</p>
+  </div>
+</div>
+
+<section style="padding-top:36px;">
+  <div class="wrap">
+
+    <!--
+      PLACEHOLDER LINKS — replace href="#" with the real show links once
+      Gordon has them (Apple Podcasts / Spotify links are generated once
+      the show is submitted to each directory via the PodPoint RSS feed).
+    -->
+    <ul class="platform-list">
+      <li><a href="#">Apple Podcasts <span class="go">Open &rarr;</span></a></li>
+      <li><a href="#">Spotify <span class="go">Open &rarr;</span></a></li>
+      <li><a href="#">YouTube <span class="go">Open &rarr;</span></a></li>
+      <li><a href="#">Amazon Music <span class="go">Open &rarr;</span></a></li>
+      <li><a href="#" id="rss-link">RSS Feed <span class="go">Copy link &rarr;</span></a></li>
+    </ul>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-badge"><img src="images/lwbc-media-ministry-logo.jpg" alt=""> The Question Mark is part of the <a href="https://www.facebook.com/profile.php?id=100064349513334" target="_blank" rel="noopener">LWBC Media Ministry</a>.</p>
+    <p>Built by <a href="https://stewartjm-dev.github.io/covenant-creation-design" target="_blank" rel="noopener">Covenant Creation &amp; Design</a>.</p>
+  </div>
+</footer>
+
+<script src="js/episodes.js"></script>
+<script>
+  // Points the RSS link at the same feed used to build the episode list.
+  var rssLink = document.getElementById('rss-link');
+  if (rssLink && typeof PODCAST_RSS_URL !== 'undefined' && PODCAST_RSS_URL) {
+    rssLink.setAttribute('href', PODCAST_RSS_URL);
+  }
+</script>
+</body>
+</html>
