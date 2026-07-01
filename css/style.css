@@ -552,6 +552,17 @@ footer.site-footer a { color: var(--ink-soft); }
   display: block;
 }
 
+@media (min-width: 900px) {
+  .banner-image {
+    display: flex;
+    justify-content: center;
+    background: var(--bg-raised);
+  }
+  .banner-image img {
+    width: 50%;
+  }
+}
+
 /* ---------- Welcome ---------- */
 
 .welcome h1 {
