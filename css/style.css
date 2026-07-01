@@ -531,3 +531,201 @@ footer.site-footer a { color: var(--ink-soft); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+/* =========================================================
+   Homepage restructure — banner + teaser tiles (July 2026)
+   Per Gordon: banner tying show to LWBC, nav upper right,
+   welcome copy, tile navigation row, episodes, footer.
+   Tiles echo Gordon's circular badge reference art, rebuilt
+   in the site's own noir language.
+   ========================================================= */
+
+/* ---------- Banner ---------- */
+
+.banner {
+  position: relative;
+  background: var(--bg-raised);
+  border-bottom: 1px solid var(--accent-blue-line);
+  overflow: hidden;
+  padding: 22px 0 40px;
+}
+
+.banner .wrap { position: relative; }
+
+.banner-nav {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+}
+
+.banner-brand {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+.banner-badges {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.banner-badge {
+  width: 96px;
+  height: 96px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px var(--accent-blue-line), 0 12px 30px rgba(0,0,0,0.55);
+}
+.banner-badge img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.banner-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(26px, 5vw, 38px);
+  line-height: 1.1;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+.banner-title .mark { font-style: italic; font-weight: 400; }
+
+.banner-tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* ---------- Welcome ---------- */
+
+.welcome h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(28px, 5vw, 42px);
+  line-height: 1.15;
+  margin: 0 0 20px;
+  max-width: 18ch;
+}
+
+.welcome p {
+  color: var(--ink-soft);
+  max-width: 58ch;
+  margin: 0 0 16px;
+}
+.welcome p:last-child { margin-bottom: 0; }
+
+/* ---------- Teaser tiles ---------- */
+
+.wrap-wide {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.tiles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.tile-medal {
+  position: relative;
+  width: 100%;
+  max-width: 176px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: var(--bg-raised);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 1px var(--accent-blue-line), 0 10px 26px rgba(0,0,0,0.5);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.tile-medal .venetian { border-radius: 50%; }
+
+.tile-ghost {
+  position: absolute;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 150px;
+  line-height: 1;
+  color: var(--ink);
+  opacity: 0.07;
+  transform: rotate(-8deg) translate(8%, -4%);
+  pointer-events: none;
+  user-select: none;
+}
+
+.tile-medal svg {
+  position: relative;
+  width: 46%;
+  height: 46%;
+  color: var(--accent-blue);
+  filter: drop-shadow(0 0 10px rgba(61, 139, 255, 0.55));
+  transition: filter 0.25s ease;
+}
+
+.tile:hover .tile-medal,
+.tile:focus-visible .tile-medal {
+  transform: translateY(-4px);
+  box-shadow: 0 0 0 1px var(--accent-blue),
+              0 0 26px rgba(61, 139, 255, 0.35),
+              0 14px 30px rgba(0,0,0,0.55);
+}
+
+.tile:hover .tile-medal svg,
+.tile:focus-visible .tile-medal svg {
+  filter: drop-shadow(0 0 16px var(--accent-blue-glow));
+}
+
+.tile-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: 16px;
+  color: var(--ink);
+}
+
+.tile-tease {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
+
+/* ---------- Responsive / motion ---------- */
+
+@media (max-width: 720px) {
+  .tiles { grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  .banner-nav { justify-content: flex-start; }
+  .banner-nav ul { flex-wrap: wrap; }
+}
+
+@media (max-width: 620px) {
+  .banner-badge { width: 72px; height: 72px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile-medal, .tile-medal svg { transition: none; }
+  .tile:hover .tile-medal, .tile:focus-visible .tile-medal { transform: none; }
+}

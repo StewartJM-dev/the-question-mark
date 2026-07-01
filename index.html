@@ -7,20 +7,26 @@
 <meta name="description" content="A podcast for the questions faith doesn't let you skip. Hosted by Gordon Conger, part of the LWBC Media Ministry.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,wght@0,400;0,500;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Newsreader:ital,wght@0,400;0,500;1,400&family=Special+Elite&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="images/favicon-64.png">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<header class="site-header">
+<!-- 1. Banner: ties the show to Living Word Baptist Church.
+     2. Nav sits upper right, inside the banner panel. -->
+<header class="banner">
+  <div class="venetian" aria-hidden="true"></div>
+  <div class="hero-marks compact" aria-hidden="true">
+    <span class="hm hm-1">?</span>
+    <span class="hm hm-2">?</span>
+    <span class="hm hm-4">?</span>
+    <span class="hm hm-blue hm-b1">?</span>
+    <span class="hm hm-blue hm-b3">?</span>
+  </div>
   <div class="wrap">
-    <a href="index.html" class="logotype">
-      <span class="logo-badge"><img src="images/question-mark-logo.jpg" alt=""></span>
-      <span>The Question Mark<span class="mark">.</span></span>
-    </a>
-    <nav class="primary-nav" aria-label="Primary">
+    <nav class="primary-nav banner-nav" aria-label="Primary">
       <ul>
         <li><a href="index.html" aria-current="page">Home</a></li>
         <li><a href="about.html">About</a></li>
@@ -29,40 +35,100 @@
         <li><a href="subscribe.html">Subscribe</a></li>
       </ul>
     </nav>
+    <div class="banner-brand">
+      <div class="banner-badges">
+        <span class="banner-badge"><img src="images/question-mark-logo.jpg" alt="The Question Mark Podcast logo"></span>
+        <span class="banner-badge"><img src="images/lwbc-media-ministry-logo.jpg" alt="LWBC Media Ministry logo"></span>
+      </div>
+      <div class="banner-text">
+        <p class="banner-title">The Question Mark<span class="mark"> Podcast</span></p>
+        <p class="banner-tag">A ministry of Living Word Baptist Church &middot; Sweet Valley, PA</p>
+      </div>
+    </div>
   </div>
 </header>
 
-<div class="hero">
-  <div class="hero-panel">
-    <div class="venetian" aria-hidden="true"></div>
-    <div class="hero-marks" aria-hidden="true">
-      <span class="hm hm-1">?</span>
-      <span class="hm hm-2">?</span>
-      <span class="hm hm-3">?</span>
-      <span class="hm hm-4">?</span>
-      <span class="hm hm-blue hm-b1">?</span>
-      <span class="hm hm-blue hm-b2">?</span>
-      <span class="hm hm-blue hm-b3">?</span>
-    </div>
-    <div class="wrap">
-      <div class="hero-brand"><img src="images/question-mark-logo.jpg" alt="The Question Mark — LWBC Connections Podcast"></div>
-      <p class="eyebrow">LWBC Connections Podcast</p>
-      <h1>What if the question matters more than the answer?</h1>
-    </div>
-  </div>
+<!-- 3. Welcome copy -->
+<section class="welcome">
   <div class="wrap">
-    <p class="lede">The Question Mark Podcast sits with the parts of faith that don't resolve easily &mdash; and takes them seriously anyway. Hosted by Gordon Conger, part of the LWBC Media Ministry.</p>
-    <div class="actions">
-      <a href="episodes.html" class="btn btn-solid">Listen to episodes</a>
-      <a href="submit.html" class="btn btn-outline">Ask a question</a>
-    </div>
+    <h1>What if the question matters more than the answer?</h1>
+    <p>Welcome. The Question Mark Podcast sits with the parts of faith that don&rsquo;t resolve easily &mdash; and takes them seriously anyway. Hosted by Gordon Conger, the show is part of the media ministry of Living Word Baptist Church in Sweet Valley, Pennsylvania.</p>
+    <p>Around here, a hard question isn&rsquo;t a threat to faith &mdash; it&rsquo;s an invitation to open the Book and look closer. Pick a door below and come on in.</p>
   </div>
-</div>
+</section>
 
+<!-- 4. Teaser tiles: one per main page -->
+<section class="tile-section">
+  <div class="wrap-wide">
+    <ul class="tiles">
+      <li>
+        <a class="tile" href="about.html">
+          <span class="tile-medal">
+            <span class="venetian" aria-hidden="true"></span>
+            <span class="tile-ghost" aria-hidden="true">?</span>
+            <svg viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+              <rect x="24" y="8" width="16" height="28" rx="8"/>
+              <line x1="27" y1="16" x2="37" y2="16"/><line x1="27" y1="22" x2="37" y2="22"/><line x1="27" y1="28" x2="37" y2="28"/>
+              <path d="M16 30v2a16 16 0 0 0 32 0v-2"/>
+              <line x1="32" y1="48" x2="32" y2="56"/><line x1="24" y1="56" x2="40" y2="56"/>
+            </svg>
+          </span>
+          <span class="tile-label">About the Show</span>
+          <span class="tile-tease">Who&rsquo;s asking &mdash; and why.</span>
+        </a>
+      </li>
+      <li>
+        <a class="tile" href="episodes.html">
+          <span class="tile-medal">
+            <span class="venetian" aria-hidden="true"></span>
+            <span class="tile-ghost" aria-hidden="true">?</span>
+            <svg viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="32" cy="32" r="22"/>
+              <path d="M27 23l14 9-14 9z"/>
+            </svg>
+          </span>
+          <span class="tile-label">All Episodes</span>
+          <span class="tile-tease">The full case file, so far.</span>
+        </a>
+      </li>
+      <li>
+        <a class="tile" href="submit.html">
+          <span class="tile-medal">
+            <span class="venetian" aria-hidden="true"></span>
+            <span class="tile-ghost" aria-hidden="true">?</span>
+            <svg viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 14h40v28H30l-10 10v-10h-8z"/>
+              <text x="32" y="34" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="currentColor" stroke="none">?</text>
+            </svg>
+          </span>
+          <span class="tile-label">Ask a Question</span>
+          <span class="tile-tease">The next one could be yours.</span>
+        </a>
+      </li>
+      <li>
+        <a class="tile" href="subscribe.html">
+          <span class="tile-medal">
+            <span class="venetian" aria-hidden="true"></span>
+            <span class="tile-ghost" aria-hidden="true">?</span>
+            <svg viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+              <circle cx="20" cy="46" r="3.5" fill="currentColor" stroke="none"/>
+              <path d="M16 32a16 16 0 0 1 16 16"/>
+              <path d="M16 20a28 28 0 0 1 28 28"/>
+            </svg>
+          </span>
+          <span class="tile-label">Subscribe</span>
+          <span class="tile-tease">Wherever you already listen.</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 5. Latest episodes -->
 <section>
   <div class="wrap">
     <p class="eyebrow">Latest episodes</p>
-    <h2>From the feed</h2>
+    <h2>New on the docket</h2>
     <ul class="episode-list" id="home-episode-list">
       <li class="feed-status">Loading episodes&hellip;</li>
     </ul>
@@ -70,34 +136,7 @@
   </div>
 </section>
 
-<section>
-  <div class="wrap">
-    <p class="eyebrow">About the show</p>
-    <h2>Doubt, examined honestly</h2>
-    <p>Gordon Conger sits down each episode to ask the question directly &mdash; no easy answers handed out, no questions waved away. It's a show for people who take their faith seriously enough to interrogate it.</p>
-    <p class="view-all"><a href="about.html">Read more &rarr;</a></p>
-  </div>
-</section>
-
-<section class="callout">
-  <div class="venetian" aria-hidden="true"></div>
-  <div class="hero-marks compact" aria-hidden="true">
-    <span class="hm hm-1">?</span>
-    <span class="hm hm-2">?</span>
-    <span class="hm hm-3">?</span>
-    <span class="hm hm-4">?</span>
-    <span class="hm hm-blue hm-b1">?</span>
-    <span class="hm hm-blue hm-b2">?</span>
-    <span class="hm hm-blue hm-b3">?</span>
-  </div>
-  <div class="wrap">
-    <p class="eyebrow">Got one?</p>
-    <h2>Submit a question for the show</h2>
-    <p class="lede">If there's something you've been sitting with, send it in. Questions submitted by listeners shape future episodes.</p>
-    <a href="submit.html" class="btn btn-solid">Ask your question</a>
-  </div>
-</section>
-
+<!-- 6. Footer -->
 <footer class="site-footer">
   <div class="wrap">
     <p class="footer-badge"><img src="images/lwbc-media-ministry-logo.jpg" alt=""> The Question Mark is part of the <a href="https://www.facebook.com/profile.php?id=100064349513334" target="_blank" rel="noopener">LWBC Media Ministry</a>.</p>
