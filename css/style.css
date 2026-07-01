@@ -208,8 +208,8 @@ nav.primary-nav a[aria-current="page"] {
 
 .hm.hm-blue { color: var(--accent-blue); text-shadow: 0 0 34px rgba(61, 139, 255, 0.9); }
 .hero-marks .hm-b1 { top: 18%;  right: 38%; font-size: 100px; opacity: 0.55; transform: rotate(6deg); }
-.hero-marks .hm-b2 { top: 64%;  left: 20%;  font-size: 76px;  opacity: 0.52; transform: rotate(-8deg); }
-.hero-marks .hm-b3 { top: 6%;   left: 6%;   font-size: 58px;  opacity: 0.50; transform: rotate(11deg); }
+.hero-marks .hm-b2 { top: 70%;  right: 24%; font-size: 76px;  opacity: 0.52; transform: rotate(-8deg); }
+.hero-marks .hm-b3 { top: 34%;  right: 4%;  font-size: 58px;  opacity: 0.50; transform: rotate(11deg); }
 
 .hero-marks.compact .hm-1 { font-size: 150px; }
 .hero-marks.compact .hm-2 { font-size: 104px; }
