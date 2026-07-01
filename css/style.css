@@ -547,48 +547,44 @@ footer.site-footer a { color: var(--ink-soft); }
   background: var(--bg-raised);
   border-bottom: 1px solid var(--accent-blue-line);
   overflow: hidden;
-  padding: 22px 0 40px;
+  padding: 48px 0 44px;
 }
 
 .banner .wrap { position: relative; }
 
-.banner-nav {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 30px;
-}
-
-.banner-brand {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  flex-wrap: wrap;
-}
-
-.banner-badges {
-  display: flex;
-  gap: 12px;
-  flex-shrink: 0;
-}
-
-.banner-badge {
-  width: 96px;
-  height: 96px;
-  border-radius: 10px;
+.banner-logo {
+  width: 168px;
+  height: 168px;
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 0 0 1px var(--accent-blue-line), 0 12px 30px rgba(0,0,0,0.55);
+  margin-bottom: 26px;
+  box-shadow: 0 0 0 1px var(--accent-blue-line), 0 16px 40px rgba(0,0,0,0.6);
 }
-.banner-badge img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.banner-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .banner-title {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(26px, 5vw, 38px);
+  font-size: clamp(30px, 6vw, 44px);
   line-height: 1.1;
-  margin: 0 0 8px;
+  margin: 0 0 14px;
   color: var(--ink);
 }
 .banner-title .mark { font-style: italic; font-weight: 400; }
+
+.banner-ministry {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.banner-lwbc {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px var(--accent-blue-line);
+}
 
 .banner-tag {
   font-family: var(--font-mono);
@@ -717,12 +713,10 @@ footer.site-footer a { color: var(--ink-soft); }
 
 @media (max-width: 720px) {
   .tiles { grid-template-columns: repeat(2, 1fr); gap: 22px; }
-  .banner-nav { justify-content: flex-start; }
-  .banner-nav ul { flex-wrap: wrap; }
 }
 
 @media (max-width: 620px) {
-  .banner-badge { width: 72px; height: 72px; }
+  .banner-logo { width: 132px; height: 132px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -732,3 +726,5 @@ footer.site-footer a { color: var(--ink-soft); }
 
 /* Tiles now use Gordon's badge artwork directly */
 .tile-medal img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.footer-nav { letter-spacing: 0.04em; }
