@@ -559,7 +559,8 @@ footer.site-footer a { color: var(--ink-soft); }
     background: var(--bg-raised);
   }
   .banner-image img {
-    width: 50%;
+    width: 100%;
+    max-width: 1300px;
   }
 }
 
