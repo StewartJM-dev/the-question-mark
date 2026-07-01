@@ -1,86 +1,62 @@
 /* =========================================================
    The Question Mark Podcast — episode feed loader
    =========================================================
-   HOW TO ACTIVATE:
-   Set PODCAST_RSS_URL below to the show's real RSS feed URL
-   from PodPoint (Settings / Distribution tab in the PodPoint
-   dashboard — it will end in something like .xml or /feed).
-   Until that's set, every page shows a friendly placeholder
-   instead of episodes.
+   Episodes are read from data/episodes.json — a plain JSON
+   file kept in this repo, refreshed automatically every few
+   hours by a GitHub Action (.github/workflows/update-episodes.yml)
+   that fetches PodPoint's RSS feed server-side and commits the
+   result.
+
+   Why not fetch the RSS feed directly in the browser? PodPoint's
+   feed doesn't send CORS headers, so a browser can't read it
+   cross-domain without going through a third-party CORS proxy —
+   and free public proxies are rate-limited and unreliable
+   (confirmed firsthand: the one this site used before got rate
+   limited and started failing silently). Reading a same-origin
+   JSON file avoids that entirely — no proxy, no CORS, no flaky
+   third party in the loop.
+
+   To manually refresh right now instead of waiting for the
+   schedule: GitHub repo → Actions tab → "Update episode feed" →
+   Run workflow.
    ========================================================= */
 
-var PODCAST_RSS_URL = "https://podpoint.com/feed/12205"; // LWBC Let's Connect channel feed (PodPoint)
+var EPISODES_JSON_URL = "data/episodes.json";
 
 // NOTE: this feed currently returns ALL episodes of the "LWBC Let's Connect"
 // channel, not just The Question Mark. "The Question Mark" is a series
-// inside that channel (podpoint.com/lwbc-lets-connect/series/the-question-mark),
-// not its own top-level PodPoint show — so Pastor Purdy's Sunday sermons will
-// show up in this feed too unless PodPoint offers a series-only feed URL.
-// Worth asking Gordon whether he wants a dedicated "Question Mark" channel
-// on PodPoint, or whether we filter this feed client-side (see FILTER_TITLE
-// below) as a stopgap.
+// inside that channel, not its own top-level PodPoint show — so Pastor
+// Purdy's Sunday sermons will show up here too unless PodPoint offers a
+// series-only feed URL. Worth asking Gordon about a dedicated channel,
+// or filtering here client-side (see FILTER_SERIES_TITLE below).
 var FILTER_SERIES_TITLE = ""; // e.g. "The Question Mark" — leave blank to show everything in the feed
-
-// Many podcast hosts don't send CORS headers, which blocks a browser
-// from fetching their RSS feed directly from a different domain (like
-// stewartjm-dev.github.io). This free proxy re-serves the feed with
-// CORS allowed. If PodPoint's feed already supports CORS, this can be
-// removed by setting USE_CORS_PROXY to false.
-var USE_CORS_PROXY = true;
-var CORS_PROXY = "https://api.allorigins.win/raw?url=";
 
 function loadEpisodes(opts) {
   var target = document.querySelector(opts.target);
   if (!target) return;
 
-  if (!PODCAST_RSS_URL) {
-    target.innerHTML =
-      '<li class="feed-status">Episodes will appear here once the show\u2019s RSS feed is connected.</li>';
-    return;
-  }
-
-  var fetchUrl = USE_CORS_PROXY
-    ? CORS_PROXY + encodeURIComponent(PODCAST_RSS_URL)
-    : PODCAST_RSS_URL;
-
-  fetch(fetchUrl)
+  fetch(EPISODES_JSON_URL, { cache: "no-store" })
     .then(function (res) {
-      if (!res.ok) throw new Error("Feed request failed: " + res.status);
-      return res.text();
+      if (!res.ok) throw new Error("episodes.json request failed: " + res.status);
+      return res.json();
     })
-    .then(function (xmlText) {
-      var parser = new DOMParser();
-      var xml = parser.parseFromString(xmlText, "application/xml");
+    .then(function (data) {
+      var episodes = (data && data.episodes) || [];
 
-      if (xml.querySelector("parsererror")) {
-        throw new Error("Could not parse RSS feed");
-      }
-
-      var items = Array.prototype.slice.call(xml.querySelectorAll("item"));
-
-      if (typeof FILTER_SERIES_TITLE !== "undefined" && FILTER_SERIES_TITLE) {
-        items = items.filter(function (item) {
-          // PodPoint typically tags an episode's series via <category>.
-          // This checks every <category> on the item for a case-insensitive
-          // match against FILTER_SERIES_TITLE. If PodPoint uses a different
-          // tag for series, this filter won't catch anything — in that case
-          // it's safer to leave FILTER_SERIES_TITLE blank and show the full
-          // feed than to silently hide every episode.
-          var categories = Array.prototype.slice.call(item.querySelectorAll("category"));
-          return categories.some(function (cat) {
-            return cat.textContent.trim().toLowerCase() === FILTER_SERIES_TITLE.toLowerCase();
-          });
+      if (FILTER_SERIES_TITLE) {
+        episodes = episodes.filter(function (ep) {
+          return (ep.category || "").trim().toLowerCase() === FILTER_SERIES_TITLE.toLowerCase();
         });
       }
 
-      if (opts.limit) items = items.slice(0, opts.limit);
+      if (opts.limit) episodes = episodes.slice(0, opts.limit);
 
-      if (!items.length) {
+      if (!episodes.length) {
         target.innerHTML = '<li class="feed-status">No episodes found in the feed yet.</li>';
         return;
       }
 
-      target.innerHTML = items.map(renderEpisode).join("");
+      target.innerHTML = episodes.map(renderEpisode).join("");
     })
     .catch(function (err) {
       console.error(err);
@@ -89,12 +65,12 @@ function loadEpisodes(opts) {
     });
 }
 
-function renderEpisode(item) {
-  var title = textOf(item, "title") || "Untitled episode";
-  var link = textOf(item, "link") || "#";
-  var pubDate = textOf(item, "pubDate");
-  var description = stripHtml(textOf(item, "description") || "");
-  var image = findImage(item);
+function renderEpisode(ep) {
+  var title = ep.title || "Untitled episode";
+  var link = ep.link || "#";
+  var pubDate = ep.pubDate || "";
+  var description = ep.description || "";
+  var image = ep.image || null;
 
   return (
     '<li>' +
@@ -167,37 +143,11 @@ function generateArt(title) {
   );
 }
 
-function textOf(item, tag) {
-  var el = item.querySelector(tag);
-  return el ? el.textContent.trim() : "";
-}
-
-function findImage(item) {
-  // Try common podcast RSS image tags in order of preference.
-  var itunesImage = item.getElementsByTagNameNS("*", "image")[0];
-  if (itunesImage && itunesImage.getAttribute("href")) {
-    return itunesImage.getAttribute("href");
-  }
-  var mediaThumb = item.getElementsByTagNameNS("*", "thumbnail")[0];
-  if (mediaThumb && mediaThumb.getAttribute("url")) {
-    return mediaThumb.getAttribute("url");
-  }
-  var enclosure = item.querySelector("enclosure[type^='image']");
-  if (enclosure) return enclosure.getAttribute("url");
-  return null;
-}
-
 function formatDate(dateStr) {
   if (!dateStr) return "";
   var d = new Date(dateStr);
   if (isNaN(d.getTime())) return dateStr;
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-}
-
-function stripHtml(str) {
-  var div = document.createElement("div");
-  div.innerHTML = str;
-  return (div.textContent || div.innerText || "").trim();
 }
 
 function escapeHtml(str) {
