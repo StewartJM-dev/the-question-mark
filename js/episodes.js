@@ -57,10 +57,11 @@ var KNOWN_TITLES = [
   "Are You Willing To Serve Jesus",
   "What Cant God Do?",
   "What Does Christmas Mean To You?",
-  "Who Are You?"
-  // TODO: add the rest of the series list here once confirmed —
-  // titles below "Who Are You?" on the series page weren't visible
-  // in the screenshot this list was built from.
+  "Who Are You?",
+  "How Important Is Prayer",
+  "Do You Know Jesus?",
+  "The Question Mark Promo",
+  "The Question We're Afraid To Ask"
 ];
 
 function normalizeTitle(str) {
