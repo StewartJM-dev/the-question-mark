@@ -1,23 +1,20 @@
 /* =========================================================
    The Question Mark Podcast — stylesheet
-   Noir / detective-title-card direction: fog-gray body, dark
-   "title card" panels (hero + closing CTA) with a spotlit "?"
-   and venetian-blind shadow texture. Still monochrome outside
-   the panels — color lives only in the show's actual logo and
-   in per-episode cover art, so it pops against the fog.
+   Black background, white lettering, throughout — per Gordon
+   and John. Noir title-card texture (venetian blinds, spotlit
+   "?") kept as atmosphere. Color lives only in the logo and in
+   per-episode cover art, so it pops against the black.
    ========================================================= */
 
 :root {
-  --bg: #d3cfc4;          /* fog gray — the page */
-  --panel: #17150f;       /* dark charcoal — title-card panels */
-  --panel-ink: #d3cfc4;   /* light text on dark panels (= bg) */
+  --bg: #0c0c0b;          /* black — the whole site */
+  --bg-raised: #17160f;   /* slightly lighter black — panels, cards */
 
-  --ink: #18160f;         /* main text on the light bg */
-  --ink-soft: #4d493d;
-  --ink-faint: #7a7566;
+  --ink: #f5f4ef;         /* white lettering */
+  --ink-soft: #b7b3a7;
+  --ink-faint: #78756a;
 
-  --hairline: rgba(24, 22, 15, 0.16);
-  --hairline-on-panel: rgba(211, 207, 196, 0.16);
+  --hairline: rgba(245, 244, 239, 0.14);
 
   --max-w: 760px;
 
@@ -149,9 +146,8 @@ nav.primary-nav a[aria-current="page"] {
 }
 
 /* ---------- Hero title card ----------
-   The signature element: a dark panel like a detective show's
-   cold-open title card, with venetian-blind shadow stripes and
-   a giant "?" glowing against the dark like a spotlight. */
+   Kept as atmosphere: venetian-blind shadow stripes and a
+   giant spotlit "?" — reads even better against true black. */
 
 .hero {
   padding: 0 0 48px;
@@ -160,10 +156,11 @@ nav.primary-nav a[aria-current="page"] {
 
 .hero-panel {
   position: relative;
-  background: var(--panel);
+  background: var(--bg-raised);
   overflow: hidden;
   padding: 52px 0 44px;
   margin-bottom: 36px;
+  border-bottom: 1px solid var(--hairline);
 }
 
 .venetian {
@@ -172,8 +169,8 @@ nav.primary-nav a[aria-current="page"] {
   pointer-events: none;
   background: repeating-linear-gradient(
     100deg,
-    rgba(211, 207, 196, 0.05) 0px,
-    rgba(211, 207, 196, 0.05) 2px,
+    rgba(245, 244, 239, 0.04) 0px,
+    rgba(245, 244, 239, 0.04) 2px,
     transparent 2px,
     transparent 22px
   );
@@ -190,8 +187,8 @@ nav.primary-nav a[aria-current="page"] {
   font-weight: 600;
   font-size: 260px;
   line-height: 1;
-  color: var(--panel-ink);
-  opacity: 0.09;
+  color: var(--ink);
+  opacity: 0.06;
   pointer-events: none;
   user-select: none;
 }
@@ -203,11 +200,11 @@ nav.primary-nav a[aria-current="page"] {
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 26px;
-  box-shadow: 0 0 0 1px var(--hairline-on-panel), 0 16px 40px rgba(0,0,0,0.55);
+  box-shadow: 0 0 0 1px var(--hairline), 0 16px 40px rgba(0,0,0,0.6);
 }
 .hero-brand img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.hero-panel .eyebrow { position: relative; color: #b3aea0; }
+.hero-panel .eyebrow { position: relative; color: var(--ink-soft); }
 
 .hero-panel h1 {
   position: relative;
@@ -217,7 +214,7 @@ nav.primary-nav a[aria-current="page"] {
   line-height: 1.12;
   margin: 8px 0 0;
   max-width: 14ch;
-  color: var(--panel-ink);
+  color: var(--ink);
 }
 
 .hero .lede {
@@ -305,7 +302,7 @@ section h2 {
   width: 84px;
   height: 84px;
   border-radius: 4px;
-  background: var(--panel);
+  background: var(--bg-raised);
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -378,24 +375,21 @@ section h2 {
 .about-copy p:last-child { margin-bottom: 0; }
 .about-copy strong { color: var(--ink); }
 
-/* ---------- Callout band ----------
-   The closing "title card" — echoes the hero panel, so the
-   site opens and closes on the same dark, spotlit motif. */
+/* ---------- Callout band ---------- */
 
 .callout {
   position: relative;
-  background: var(--panel);
-  color: var(--panel-ink);
+  background: var(--bg-raised);
+  color: var(--ink);
   border-bottom: none;
   overflow: hidden;
 }
-.callout .venetian { opacity: 1; }
 .callout .wrap { position: relative; }
-.callout .eyebrow { color: #b3aea0 !important; }
-.callout h2 { color: var(--panel-ink); }
-.callout .lede { color: #beb9ab; max-width: 48ch; margin: 0 0 28px; }
-.callout .btn-solid { background: var(--panel-ink); color: var(--panel); border-color: var(--panel-ink); }
-.callout .btn-solid:hover { background: #bcb7a8; border-color: #bcb7a8; }
+.callout .eyebrow { color: var(--ink-soft); }
+.callout h2 { color: var(--ink); }
+.callout .lede { color: var(--ink-soft); max-width: 48ch; margin: 0 0 28px; }
+.callout .btn-solid { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.callout .btn-solid:hover { background: var(--ink-soft); border-color: var(--ink-soft); }
 
 /* ---------- Form ---------- */
 
@@ -467,7 +461,7 @@ form.question-form {
   font-size: 18px;
 }
 
-.platform-list a:hover { background: #c7c3b7; }
+.platform-list a:hover { background: var(--bg-raised); }
 
 .platform-list .go {
   font-family: var(--font-mono);
