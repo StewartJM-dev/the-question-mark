@@ -150,110 +150,64 @@ nav.primary-nav a[aria-current="page"] {
   border-bottom-color: var(--ink);
 }
 
-/* ---------- Hero title card ----------
-   Kept as atmosphere: venetian-blind shadow stripes and a
-   giant spotlit "?" — reads even better against true black. */
+/* ---------- Back bar (subpages) ---------- */
 
-.hero {
-  padding: 0 0 48px;
-  border-bottom: 1px solid var(--hairline);
-  overflow: hidden;
+.back-bar {
+  padding: 18px 0;
 }
 
-.hero-panel {
-  position: relative;
-  background: var(--bg-raised);
-  overflow: hidden;
-  padding: 52px 0 44px;
-  margin-bottom: 36px;
-  border: 1px solid var(--accent-blue-line);
+.back-link {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+.back-link:hover { color: var(--ink); }
+
+/* ---------- Page intro (subpages) ----------
+   Sits below the shared banner: a large, non-interactive tile
+   image matching the one used to reach the page, then title
+   copy — no boxed panel, just plain background. */
+
+.page-intro {
+  padding: 40px 0 8px;
 }
 
-.venetian {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    100deg,
-    rgba(245, 244, 239, 0.04) 0px,
-    rgba(245, 244, 239, 0.04) 2px,
-    transparent 2px,
-    transparent 22px
-  );
-}
-
-.hero-panel .wrap { position: relative; }
-
-.hero-marks {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  user-select: none;
-}
-
-.hm {
-  position: absolute;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 600;
-  color: var(--ink);
-  line-height: 1;
-}
-
-.hero-marks .hm-1 { top: -16%; right: -3%;  font-size: 280px; opacity: 0.14; transform: rotate(-4deg); }
-.hero-marks .hm-2 { top: 46%;  left: -6%;   font-size: 190px; opacity: 0.12; transform: rotate(7deg); }
-.hero-marks .hm-3 { top: -10%; left: 34%;   font-size: 130px; opacity: 0.10; transform: rotate(-13deg); }
-.hero-marks .hm-4 { top: 58%;  right: 14%;  font-size: 110px; opacity: 0.10; transform: rotate(10deg); }
-
-.hm.hm-blue { color: var(--accent-blue); text-shadow: 0 0 34px rgba(61, 139, 255, 0.9); }
-.hero-marks .hm-b1 { top: 18%;  right: 38%; font-size: 100px; opacity: 0.55; transform: rotate(6deg); }
-.hero-marks .hm-b2 { top: 70%;  right: 24%; font-size: 76px;  opacity: 0.52; transform: rotate(-8deg); }
-.hero-marks .hm-b3 { top: 34%;  right: 4%;  font-size: 58px;  opacity: 0.50; transform: rotate(11deg); }
-
-.hero-marks.compact .hm-1 { font-size: 150px; }
-.hero-marks.compact .hm-2 { font-size: 104px; }
-.hero-marks.compact .hm-3 { font-size: 72px; }
-.hero-marks.compact .hm-4 { font-size: 60px; }
-.hero-marks.compact .hm-b1 { font-size: 56px; }
-.hero-marks.compact .hm-b2 { font-size: 42px; }
-.hero-marks.compact .hm-b3 { font-size: 32px; }
-
-.hero-brand {
-  position: relative;
-  width: 168px;
-  height: 168px;
-  border-radius: 14px;
+.page-tile {
+  width: 240px;
+  height: 240px;
+  border-radius: 16px;
   overflow: hidden;
   margin-bottom: 26px;
-  box-shadow: 0 0 0 1px var(--accent-blue-line), 0 16px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 0 0 1px var(--accent-blue-line), 0 16px 40px rgba(0,0,0,0.5);
 }
-.hero-brand img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.page-tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.hero-panel .eyebrow { position: relative; color: var(--ink-soft); }
-
-.hero-panel h1 {
-  position: relative;
+.page-intro h1 {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(32px, 6vw, 52px);
-  line-height: 1.12;
+  font-size: clamp(28px, 5vw, 40px);
+  line-height: 1.15;
   margin: 8px 0 0;
-  max-width: 14ch;
+  max-width: 16ch;
   color: var(--ink);
 }
 
-.hero .lede {
+.lede {
   font-size: 20px;
   color: var(--ink-soft);
   max-width: 46ch;
-  margin: 0 0 32px;
+  margin: 18px 0 0;
 }
 
-.hero .actions {
+.actions {
   display: flex;
   gap: 14px;
   flex-wrap: wrap;
+  margin-top: 24px;
 }
 
 /* ---------- Buttons ---------- */
@@ -293,9 +247,7 @@ nav.primary-nav a[aria-current="page"] {
 
 section {
   padding: 52px 0;
-  border-bottom: 1px solid var(--hairline);
 }
-section:last-of-type { border-bottom: none; }
 
 section h2 {
   font-family: var(--font-display);
@@ -405,18 +357,11 @@ section h2 {
 /* ---------- Callout band ---------- */
 
 .callout {
-  position: relative;
-  background: var(--bg-raised);
-  color: var(--ink);
-  border-bottom: none;
-  border-top: 1px solid var(--accent-blue-line);
-  border-bottom: 1px solid var(--accent-blue-line);
-  overflow: hidden;
+  background: none;
 }
-.callout .wrap { position: relative; }
 .callout .eyebrow { color: var(--ink-soft); }
 .callout h2 { color: var(--ink); }
-.callout .lede { color: var(--ink-soft); max-width: 48ch; margin: 0 0 28px; }
+.callout .lede { color: var(--ink-soft); max-width: 48ch; margin: 18px 0 28px; }
 .callout .btn-solid { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .callout .btn-solid:hover { background: var(--ink-soft); border-color: var(--ink-soft); }
 
@@ -520,8 +465,7 @@ footer.site-footer a { color: var(--ink-soft); }
 
 @media (max-width: 620px) {
   body { font-size: 17px; }
-  .hero-panel { padding: 40px 0 32px; }
-  .hero-mark-bg { font-size: 160px; }
+  .page-tile { width: 180px; height: 180px; }
   .episode { grid-template-columns: 60px 1fr; }
   .episode-art { width: 60px; height: 60px; }
   .about-figure { flex-direction: column; }
@@ -543,7 +487,6 @@ footer.site-footer a { color: var(--ink-soft); }
 /* ---------- Banner ---------- */
 
 .banner-image {
-  border-bottom: 1px solid var(--accent-blue-line);
   line-height: 0;
 }
 .banner-image img {
