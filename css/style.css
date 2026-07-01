@@ -528,7 +528,7 @@ footer.site-footer a { color: var(--ink-soft); }
 /* ---------- Teaser tiles ---------- */
 
 .wrap-wide {
-  max-width: 920px;
+  max-width: 1040px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -538,8 +538,8 @@ footer.site-footer a { color: var(--ink-soft); }
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 26px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 22px;
 }
 
 .tile {
