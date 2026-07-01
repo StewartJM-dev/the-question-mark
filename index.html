@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Question Mark Podcast</title>
+<meta name="description" content="A podcast for the questions faith doesn't let you skip. Hosted by Gordon Conger, part of the LWBC Media Ministry.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,wght@0,400;0,500;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/favicon-64.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logotype">
+      <span class="logo-badge"><img src="images/question-mark-logo.jpg" alt=""></span>
+      <span>The Question Mark<span class="mark">.</span></span>
+    </a>
+    <nav class="primary-nav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="episodes.html">Episodes</a></li>
+        <li><a href="submit.html">Submit a Question</a></li>
+        <li><a href="subscribe.html">Subscribe</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-panel">
+    <div class="venetian" aria-hidden="true"></div>
+    <div class="hero-mark-bg" aria-hidden="true">?</div>
+    <div class="wrap">
+      <div class="hero-brand"><img src="images/question-mark-logo.jpg" alt="The Question Mark — LWBC Connections Podcast"></div>
+      <p class="eyebrow">LWBC Connections Podcast</p>
+      <h1>What if the question matters more than the answer?</h1>
+    </div>
+  </div>
+  <div class="wrap">
+    <p class="lede">The Question Mark Podcast sits with the parts of faith that don't resolve easily &mdash; and takes them seriously anyway. Hosted by Gordon Conger, part of the LWBC Media Ministry.</p>
+    <div class="actions">
+      <a href="episodes.html" class="btn btn-solid">Listen to episodes</a>
+      <a href="submit.html" class="btn btn-outline">Ask a question</a>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Latest episodes</p>
+    <h2>From the feed</h2>
+    <ul class="episode-list" id="home-episode-list">
+      <li class="feed-status">Loading episodes&hellip;</li>
+    </ul>
+    <p class="view-all"><a href="episodes.html">View all episodes &rarr;</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">About the show</p>
+    <h2>Doubt, examined honestly</h2>
+    <p>Gordon Conger sits down each episode to ask the question directly &mdash; no easy answers handed out, no questions waved away. It's a show for people who take their faith seriously enough to interrogate it.</p>
+    <p class="view-all"><a href="about.html">Read more &rarr;</a></p>
+  </div>
+</section>
+
+<section class="callout">
+  <div class="venetian" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="eyebrow">Got one?</p>
+    <h2>Submit a question for the show</h2>
+    <p class="lede">If there's something you've been sitting with, send it in. Questions submitted by listeners shape future episodes.</p>
+    <a href="submit.html" class="btn btn-solid">Ask your question</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-badge"><img src="images/lwbc-media-ministry-logo.jpg" alt=""> The Question Mark is part of the <a href="https://www.facebook.com/profile.php?id=100064349513334" target="_blank" rel="noopener">LWBC Media Ministry</a>.</p>
+    <p>Built by <a href="https://stewartjm-dev.github.io/covenant-creation-design" target="_blank" rel="noopener">Covenant Creation &amp; Design</a>.</p>
+  </div>
+</footer>
+
+<script src="js/episodes.js"></script>
+<script>
+  loadEpisodes({ target: '#home-episode-list', limit: 3 });
+</script>
+</body>
+</html>
