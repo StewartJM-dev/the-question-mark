@@ -1,0 +1,510 @@
+/* =========================================================
+   The Question Mark Podcast — stylesheet
+   Noir / detective-title-card direction: fog-gray body, dark
+   "title card" panels (hero + closing CTA) with a spotlit "?"
+   and venetian-blind shadow texture. Still monochrome outside
+   the panels — color lives only in the show's actual logo and
+   in per-episode cover art, so it pops against the fog.
+   ========================================================= */
+
+:root {
+  --bg: #d3cfc4;          /* fog gray — the page */
+  --panel: #17150f;       /* dark charcoal — title-card panels */
+  --panel-ink: #d3cfc4;   /* light text on dark panels (= bg) */
+
+  --ink: #18160f;         /* main text on the light bg */
+  --ink-soft: #4d493d;
+  --ink-faint: #7a7566;
+
+  --hairline: rgba(24, 22, 15, 0.16);
+  --hairline-on-panel: rgba(211, 207, 196, 0.16);
+
+  --max-w: 760px;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Newsreader", Georgia, serif;
+  --font-mono: "Special Elite", "Courier New", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 19px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--ink);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+a:hover { color: var(--ink-soft); }
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+img { max-width: 100%; display: block; }
+
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ---------- Header / nav ---------- */
+
+.site-header {
+  border-bottom: 1px solid var(--hairline);
+  padding: 20px 0;
+  background: var(--bg);
+}
+
+.site-header .wrap {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.logotype {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 19px;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+.logotype .mark {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.logo-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px var(--hairline);
+}
+.logo-badge img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.footer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.footer-badge img {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+nav.primary-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+nav.primary-nav a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 1px solid transparent;
+}
+nav.primary-nav a:hover,
+nav.primary-nav a[aria-current="page"] {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+/* ---------- Hero title card ----------
+   The signature element: a dark panel like a detective show's
+   cold-open title card, with venetian-blind shadow stripes and
+   a giant "?" glowing against the dark like a spotlight. */
+
+.hero {
+  padding: 0 0 48px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.hero-panel {
+  position: relative;
+  background: var(--panel);
+  overflow: hidden;
+  padding: 52px 0 44px;
+  margin-bottom: 36px;
+}
+
+.venetian {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    100deg,
+    rgba(211, 207, 196, 0.05) 0px,
+    rgba(211, 207, 196, 0.05) 2px,
+    transparent 2px,
+    transparent 22px
+  );
+}
+
+.hero-panel .wrap { position: relative; }
+
+.hero-mark-bg {
+  position: absolute;
+  top: -0.28em;
+  right: -0.04em;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 260px;
+  line-height: 1;
+  color: var(--panel-ink);
+  opacity: 0.09;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-brand {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 22px;
+  box-shadow: 0 0 0 1px var(--hairline-on-panel);
+}
+.hero-brand img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.hero-panel .eyebrow { position: relative; color: #b3aea0; }
+
+.hero-panel h1 {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(32px, 6vw, 52px);
+  line-height: 1.12;
+  margin: 8px 0 0;
+  max-width: 14ch;
+  color: var(--panel-ink);
+}
+
+.hero .lede {
+  font-size: 20px;
+  color: var(--ink-soft);
+  max-width: 46ch;
+  margin: 0 0 32px;
+}
+
+.hero .actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 13px 22px;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+}
+
+.btn-solid {
+  background: var(--ink);
+  color: var(--bg);
+}
+.btn-solid:hover {
+  background: var(--ink-soft);
+  color: var(--bg);
+  border-color: var(--ink-soft);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+}
+.btn-outline:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* ---------- Sections ---------- */
+
+section {
+  padding: 52px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+section:last-of-type { border-bottom: none; }
+
+section h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 28px;
+  margin: 6px 0 26px;
+  color: var(--ink);
+}
+
+/* ---------- Episode list ---------- */
+
+.episode-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.episode {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 18px;
+  padding: 22px 0;
+  border-top: 1px solid var(--hairline);
+  text-decoration: none;
+  color: var(--ink);
+}
+.episode:first-child { border-top: none; }
+
+.episode-art {
+  width: 84px;
+  height: 84px;
+  border-radius: 4px;
+  background: var(--panel);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.episode-art img,
+.episode-art svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.episode-date {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 4px;
+}
+
+.episode-title {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 500;
+  margin: 0 0 4px;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.episode-blurb {
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.feed-status {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-faint);
+  padding: 14px 0;
+}
+
+.view-all {
+  margin-top: 28px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* ---------- About / bio ---------- */
+
+.about-figure {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.about-figure img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 3px;
+  filter: grayscale(1);
+}
+
+.about-copy p { margin: 0 0 18px; color: var(--ink-soft); }
+.about-copy p:last-child { margin-bottom: 0; }
+.about-copy strong { color: var(--ink); }
+
+/* ---------- Callout band ----------
+   The closing "title card" — echoes the hero panel, so the
+   site opens and closes on the same dark, spotlit motif. */
+
+.callout {
+  position: relative;
+  background: var(--panel);
+  color: var(--panel-ink);
+  border-bottom: none;
+  overflow: hidden;
+}
+.callout .venetian { opacity: 1; }
+.callout .wrap { position: relative; }
+.callout .eyebrow { color: #b3aea0 !important; }
+.callout h2 { color: var(--panel-ink); }
+.callout .lede { color: #beb9ab; max-width: 48ch; margin: 0 0 28px; }
+.callout .btn-solid { background: var(--panel-ink); color: var(--panel); border-color: var(--panel-ink); }
+.callout .btn-solid:hover { background: #bcb7a8; border-color: #bcb7a8; }
+
+/* ---------- Form ---------- */
+
+form.question-form {
+  max-width: 520px;
+}
+
+.field {
+  margin-bottom: 22px;
+}
+
+.field label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--hairline);
+  padding: 10px 2px;
+  border-radius: 0;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-bottom-color: var(--ink);
+}
+
+.field textarea { resize: vertical; min-height: 120px; }
+
+.form-note {
+  font-size: 14px;
+  color: var(--ink-faint);
+  margin-top: 18px;
+}
+
+/* ---------- Subscribe platforms ---------- */
+
+.platform-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+}
+
+.platform-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg);
+  color: var(--ink);
+  padding: 18px 20px;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 18px;
+}
+
+.platform-list a:hover { background: #c7c3b7; }
+
+.platform-list .go {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+/* ---------- Footer ---------- */
+
+footer.site-footer {
+  padding: 40px 0 60px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faint);
+  letter-spacing: 0.01em;
+}
+
+footer.site-footer .wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+footer.site-footer a { color: var(--ink-soft); }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 620px) {
+  body { font-size: 17px; }
+  .hero-panel { padding: 40px 0 32px; }
+  .hero-mark-bg { font-size: 160px; }
+  .episode { grid-template-columns: 60px 1fr; }
+  .episode-art { width: 60px; height: 60px; }
+  .about-figure { flex-direction: column; }
+  nav.primary-nav ul { gap: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
