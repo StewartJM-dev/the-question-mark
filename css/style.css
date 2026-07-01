@@ -157,6 +157,7 @@ nav.primary-nav a[aria-current="page"] {
 .hero {
   padding: 0 0 48px;
   border-bottom: 1px solid var(--hairline);
+  overflow: hidden;
 }
 
 .hero-panel {
@@ -205,10 +206,10 @@ nav.primary-nav a[aria-current="page"] {
 .hero-marks .hm-3 { top: -10%; left: 34%;   font-size: 130px; opacity: 0.10; transform: rotate(-13deg); }
 .hero-marks .hm-4 { top: 58%;  right: 14%;  font-size: 110px; opacity: 0.10; transform: rotate(10deg); }
 
-.hm.hm-blue { color: var(--accent-blue-glow); }
-.hero-marks .hm-b1 { top: 18%;  right: 38%; font-size: 100px; opacity: 0.16; transform: rotate(6deg); }
-.hero-marks .hm-b2 { top: 64%;  left: 20%;  font-size: 76px;  opacity: 0.15; transform: rotate(-8deg); }
-.hero-marks .hm-b3 { top: 4%;   left: 6%;   font-size: 58px;  opacity: 0.14; transform: rotate(11deg); }
+.hm.hm-blue { color: var(--accent-blue); }
+.hero-marks .hm-b1 { top: 18%;  right: 38%; font-size: 100px; opacity: 0.32; transform: rotate(6deg); }
+.hero-marks .hm-b2 { top: 64%;  left: 20%;  font-size: 76px;  opacity: 0.30; transform: rotate(-8deg); }
+.hero-marks .hm-b3 { top: 6%;   left: 6%;   font-size: 58px;  opacity: 0.28; transform: rotate(11deg); }
 
 .hero-marks.compact .hm-1 { font-size: 150px; }
 .hero-marks.compact .hm-2 { font-size: 104px; }
