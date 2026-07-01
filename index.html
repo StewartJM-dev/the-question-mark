@@ -28,8 +28,8 @@
 <section class="welcome">
   <div class="wrap">
     <h1>What if the question matters more than the answer?</h1>
-    <p>Welcome. The Question Mark Podcast sits with the parts of faith that don&rsquo;t resolve easily &mdash; and takes them seriously anyway. Hosted by Gordon Conger, the show is part of the media ministry of Living Word Baptist Church in Sweet Valley, Pennsylvania.</p>
-    <p>Around here, a hard question isn&rsquo;t a threat to faith &mdash; it&rsquo;s an invitation to open the Book and look closer. Pick a door below and come on in.</p>
+    <p>Welcome. The Question Mark Podcast sits with the parts of faith that don&rsquo;t resolve easily &mdash; and takes them seriously anyway. Hosted by Gordon Conger, the show is part of the media ministry of Living Word Baptist Church in Sweet Valley, Pennsylvania. This is a place for the questions that linger after the sermon ends, the ones that surface at 2 a.m., the ones that feel too big or too honest to say out loud in a pew. Gordon brings each of them into the open with care, humility, and an unwavering conviction that God&rsquo;s Word has something real to say &mdash; not to silence the question, but to meet it.</p>
+    <p>Around here, a hard question isn&rsquo;t a threat to faith &mdash; it&rsquo;s an invitation to open the Book and look closer. Whether you are a lifelong believer who has hit a wall, someone who is just beginning to explore what Christianity is all about, or anywhere in between, you are welcome at this table. Each episode is a conversation rooted in Scripture, shaped by honesty, and offered with the belief that asking is the first step toward finding. So pull up a chair, bring whatever is weighing on you, pick a door below, and come on in.</p>
   </div>
 </section>
 
@@ -38,7 +38,7 @@
   <div class="wrap-wide">
     <ul class="tiles">
       <li>
-        <a class="tile" href="episodes.html">
+        <a class="tile" id="tile-latest-episode" href="episodes.html">
           <span class="tile-medal">
             <img src="images/tile-latest.jpg" alt="Listen to the latest episode">
           </span>
@@ -77,23 +77,19 @@
           <span class="tile-label">Subscribe</span>
         </a>
       </li>
+      <li>
+        <button type="button" class="tile" id="tile-download-app">
+          <span class="tile-medal">
+            <img src="images/tile-download-app.png" alt="Download app — add to your home screen">
+          </span>
+          <span class="tile-label">Download App</span>
+        </button>
+      </li>
     </ul>
   </div>
 </section>
 
-<!-- 5. Latest episodes -->
-<section>
-  <div class="wrap">
-    <p class="eyebrow">Latest episodes</p>
-    <h2>New on the docket</h2>
-    <ul class="episode-list" id="home-episode-list">
-      <li class="feed-status">Loading episodes&hellip;</li>
-    </ul>
-    <p class="view-all"><a href="episodes.html">View all episodes &rarr;</a></p>
-  </div>
-</section>
-
-<!-- 6. Footer -->
+<!-- 5. Footer -->
 <footer class="site-footer-image">
   <img src="images/footer.jpg" alt="The Question Mark is part of the LWBC Media Ministry. Built by Covenant Creation &amp; Design. Living Word Baptist Church, 40 Hess Lane, Sweet Valley, PA.">
   <a class="footer-hotspot fh-lwbc-logo" href="https://www.facebook.com/profile.php?id=100064349513334" target="_blank" rel="noopener" aria-label="LWBC Media Ministry on Facebook"></a>
@@ -107,9 +103,77 @@
   <a class="footer-hotspot fh-lwbc-address" href="https://www.lwbcsv.com" target="_blank" rel="noopener" aria-label="Living Word Baptist Church website"></a>
 </footer>
 
+<!-- Add-to-Home-Screen instructions modal -->
+<div class="modal-overlay" id="install-modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="install-modal-title">
+    <button type="button" class="modal-close" id="install-modal-close" aria-label="Close">&times;</button>
+    <p class="eyebrow" id="install-modal-title">Download the app</p>
+    <h2>Add to your home screen</h2>
+    <p class="lede">The Question Mark isn&rsquo;t in the App Store &mdash; but your phone can install it straight from this site, with its own icon and no browser bar, in a few taps.</p>
+
+    <div class="install-tabs" role="tablist">
+      <button type="button" class="install-tab" id="tab-ios" role="tab" aria-selected="true">iPhone / iPad</button>
+      <button type="button" class="install-tab" id="tab-android" role="tab" aria-selected="false">Android</button>
+    </div>
+
+    <ol class="install-steps" id="steps-ios">
+      <li>Tap the <strong>Share</strong> button (the square with an arrow pointing up) in Safari&rsquo;s toolbar.</li>
+      <li>Scroll down and tap <strong>&ldquo;Add to Home Screen.&rdquo;</strong></li>
+      <li>Tap <strong>&ldquo;Add&rdquo;</strong> in the top right corner.</li>
+    </ol>
+
+    <ol class="install-steps" id="steps-android" hidden>
+      <li>Tap the <strong>&#8942;</strong> menu (three dots) in Chrome&rsquo;s toolbar &mdash; or tap <strong>&ldquo;Install&rdquo;</strong> directly if Chrome offers it.</li>
+      <li>Tap <strong>&ldquo;Add to Home screen&rdquo;</strong> or <strong>&ldquo;Install app.&rdquo;</strong></li>
+      <li>Confirm by tapping <strong>&ldquo;Add&rdquo;</strong> or <strong>&ldquo;Install.&rdquo;</strong></li>
+    </ol>
+
+    <p class="form-note">Once added, the icon opens the site full-screen, just like a downloaded app.</p>
+  </div>
+</div>
+
 <script src="js/episodes.js"></script>
 <script>
-  loadEpisodes({ target: '#home-episode-list', limit: 3 });
+  setLatestEpisodeLink('#tile-latest-episode');
+
+  (function () {
+    var modal = document.getElementById('install-modal');
+    var openBtn = document.getElementById('tile-download-app');
+    var closeBtn = document.getElementById('install-modal-close');
+    var tabIOS = document.getElementById('tab-ios');
+    var tabAndroid = document.getElementById('tab-android');
+    var stepsIOS = document.getElementById('steps-ios');
+    var stepsAndroid = document.getElementById('steps-android');
+
+    function showTab(which) {
+      var isIOS = which === 'ios';
+      stepsIOS.hidden = !isIOS;
+      stepsAndroid.hidden = isIOS;
+      tabIOS.setAttribute('aria-selected', String(isIOS));
+      tabAndroid.setAttribute('aria-selected', String(!isIOS));
+    }
+
+    // Pre-select the relevant tab based on the visitor's device.
+    var ua = navigator.userAgent || '';
+    if (/Android/i.test(ua)) showTab('android');
+    else showTab('ios');
+
+    tabIOS.addEventListener('click', function () { showTab('ios'); });
+    tabAndroid.addEventListener('click', function () { showTab('android'); });
+
+    openBtn.addEventListener('click', function () {
+      modal.hidden = false;
+    });
+    closeBtn.addEventListener('click', function () {
+      modal.hidden = true;
+    });
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) modal.hidden = true;
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') modal.hidden = true;
+    });
+  })();
 </script>
 </body>
 </html>
