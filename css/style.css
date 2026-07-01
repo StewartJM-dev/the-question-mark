@@ -16,6 +16,10 @@
 
   --hairline: rgba(245, 244, 239, 0.14);
 
+  --accent-blue: #3b74e0;
+  --accent-blue-line: rgba(59, 116, 224, 0.5);
+  --accent-blue-glow: rgba(94, 200, 240, 0.9);
+
   --max-w: 760px;
 
   --font-display: "Fraunces", Georgia, serif;
@@ -105,7 +109,7 @@ img { max-width: 100%; display: block; }
   border-radius: 6px;
   overflow: hidden;
   flex-shrink: 0;
-  box-shadow: 0 0 0 1px var(--hairline);
+  box-shadow: 0 0 0 1px var(--accent-blue-line);
 }
 .logo-badge img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
@@ -119,6 +123,7 @@ img { max-width: 100%; display: block; }
   height: 52px;
   border-radius: 6px;
   vertical-align: middle;
+  box-shadow: 0 0 0 1px var(--accent-blue-line);
 }
 
 nav.primary-nav ul {
@@ -160,7 +165,7 @@ nav.primary-nav a[aria-current="page"] {
   overflow: hidden;
   padding: 52px 0 44px;
   margin-bottom: 36px;
-  border-bottom: 1px solid var(--hairline);
+  border: 1px solid var(--accent-blue-line);
 }
 
 .venetian {
@@ -200,10 +205,18 @@ nav.primary-nav a[aria-current="page"] {
 .hero-marks .hm-3 { top: -10%; left: 34%;   font-size: 130px; opacity: 0.10; transform: rotate(-13deg); }
 .hero-marks .hm-4 { top: 58%;  right: 14%;  font-size: 110px; opacity: 0.10; transform: rotate(10deg); }
 
+.hm.hm-blue { color: var(--accent-blue-glow); }
+.hero-marks .hm-b1 { top: 18%;  right: 38%; font-size: 100px; opacity: 0.16; transform: rotate(6deg); }
+.hero-marks .hm-b2 { top: 64%;  left: 20%;  font-size: 76px;  opacity: 0.15; transform: rotate(-8deg); }
+.hero-marks .hm-b3 { top: 4%;   left: 6%;   font-size: 58px;  opacity: 0.14; transform: rotate(11deg); }
+
 .hero-marks.compact .hm-1 { font-size: 150px; }
 .hero-marks.compact .hm-2 { font-size: 104px; }
 .hero-marks.compact .hm-3 { font-size: 72px; }
 .hero-marks.compact .hm-4 { font-size: 60px; }
+.hero-marks.compact .hm-b1 { font-size: 56px; }
+.hero-marks.compact .hm-b2 { font-size: 42px; }
+.hero-marks.compact .hm-b3 { font-size: 32px; }
 
 .hero-brand {
   position: relative;
@@ -212,7 +225,7 @@ nav.primary-nav a[aria-current="page"] {
   border-radius: 14px;
   overflow: hidden;
   margin-bottom: 26px;
-  box-shadow: 0 0 0 1px var(--hairline), 0 16px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 0 0 1px var(--accent-blue-line), 0 16px 40px rgba(0,0,0,0.6);
 }
 .hero-brand img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
@@ -317,6 +330,7 @@ section h2 {
   background: var(--bg-raised);
   overflow: hidden;
   flex-shrink: 0;
+  box-shadow: 0 0 0 1px var(--accent-blue-line);
 }
 .episode-art img,
 .episode-art svg { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -394,6 +408,8 @@ section h2 {
   background: var(--bg-raised);
   color: var(--ink);
   border-bottom: none;
+  border-top: 1px solid var(--accent-blue-line);
+  border-bottom: 1px solid var(--accent-blue-line);
   overflow: hidden;
 }
 .callout .wrap { position: relative; }
@@ -457,8 +473,8 @@ form.question-form {
   padding: 0;
   display: grid;
   gap: 1px;
-  background: var(--hairline);
-  border: 1px solid var(--hairline);
+  background: var(--accent-blue-line);
+  border: 1px solid var(--accent-blue-line);
 }
 
 .platform-list a {
