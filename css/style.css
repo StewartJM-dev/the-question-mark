@@ -542,57 +542,14 @@ footer.site-footer a { color: var(--ink-soft); }
 
 /* ---------- Banner ---------- */
 
-.banner {
-  position: relative;
-  background: var(--bg-raised);
+.banner-image {
   border-bottom: 1px solid var(--accent-blue-line);
-  overflow: hidden;
-  padding: 48px 0 44px;
+  line-height: 0;
 }
-
-.banner .wrap { position: relative; }
-
-.banner-logo {
-  width: 168px;
-  height: 168px;
-  border-radius: 14px;
-  overflow: hidden;
-  margin-bottom: 26px;
-  box-shadow: 0 0 0 1px var(--accent-blue-line), 0 16px 40px rgba(0,0,0,0.6);
-}
-.banner-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-.banner-title {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(30px, 6vw, 44px);
-  line-height: 1.1;
-  margin: 0 0 14px;
-  color: var(--ink);
-}
-.banner-title .mark { font-style: italic; font-weight: 400; }
-
-.banner-ministry {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.banner-lwbc {
-  width: 44px;
-  height: 44px;
-  border-radius: 6px;
-  flex-shrink: 0;
-  box-shadow: 0 0 0 1px var(--accent-blue-line);
-}
-
-.banner-tag {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  margin: 0;
+.banner-image img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* ---------- Welcome ---------- */
@@ -716,7 +673,6 @@ footer.site-footer a { color: var(--ink-soft); }
 }
 
 @media (max-width: 620px) {
-  .banner-logo { width: 132px; height: 132px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
