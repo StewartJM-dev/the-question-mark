@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Submit a Question — The Question Mark Podcast</title>
+<meta name="description" content="Send in a question for The Question Mark Podcast.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,wght@0,400;0,500;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/favicon-64.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logotype">
+      <span class="logo-badge"><img src="images/question-mark-logo.jpg" alt=""></span>
+      <span>The Question Mark<span class="mark">.</span></span>
+    </a>
+    <nav class="primary-nav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="episodes.html">Episodes</a></li>
+        <li><a href="submit.html" aria-current="page">Submit a Question</a></li>
+        <li><a href="subscribe.html">Subscribe</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-panel" style="padding:36px 0 30px;">
+    <div class="venetian" aria-hidden="true"></div>
+    <div class="hero-mark-bg" aria-hidden="true" style="font-size:140px;">?</div>
+    <div class="wrap">
+      <p class="eyebrow">Submit a question</p>
+      <h1 style="font-size:clamp(28px,5vw,40px);margin-top:6px;">What's on your mind?</h1>
+    </div>
+  </div>
+  <div class="wrap">
+    <p class="lede">Send it in. Listener questions shape future episodes &mdash; there's no question too small or too sharp.</p>
+  </div>
+</div>
+
+<section style="padding-top:36px;">
+  <div class="wrap">
+
+    <!--
+      FORM NOTE FOR JOHN:
+      GitHub Pages is static and can't process form submissions server-side,
+      so this form currently opens the visitor's email client via a mailto:
+      link, addressed to thequestionmarkpodcast@yahoo.com. That works with
+      zero setup, but has two caveats:
+        1. It requires the visitor to have an email client configured.
+        2. thequestionmarkpodcast@yahoo.com needs to actually exist —
+           per the brief it hasn't been created yet.
+
+      UPGRADE PATH (optional, when ready): swap this for a free Formspree
+      form (formspree.io) — sign up, get an endpoint, change the <form>
+      action to "https://formspree.io/f/YOUR_ID" and method to "POST",
+      remove the JS mailto handler below. That submits silently in-page
+      without opening the visitor's mail app.
+    -->
+
+    <form class="question-form" id="question-form">
+      <div class="field">
+        <label for="q-name">Name</label>
+        <input type="text" id="q-name" name="name" required>
+      </div>
+      <div class="field">
+        <label for="q-email">Email (optional, if you'd like a reply)</label>
+        <input type="email" id="q-email" name="email">
+      </div>
+      <div class="field">
+        <label for="q-question">Your question</label>
+        <textarea id="q-question" name="question" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-solid">Send question</button>
+      <p class="form-note">This opens your email app, addressed to the show, with your question filled in.</p>
+    </form>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-badge"><img src="images/lwbc-media-ministry-logo.jpg" alt=""> The Question Mark is part of the <a href="https://www.facebook.com/profile.php?id=100064349513334" target="_blank" rel="noopener">LWBC Media Ministry</a>.</p>
+    <p>Built by <a href="https://stewartjm-dev.github.io/covenant-creation-design" target="_blank" rel="noopener">Covenant Creation &amp; Design</a>.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('question-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('q-name').value.trim();
+    var email = document.getElementById('q-email').value.trim();
+    var question = document.getElementById('q-question').value.trim();
+
+    var subject = 'Question for The Question Mark Podcast';
+    var bodyLines = [
+      'From: ' + name + (email ? ' (' + email + ')' : ''),
+      '',
+      question
+    ];
+    var mailto = 'mailto:thequestionmarkpodcast@yahoo.com'
+      + '?subject=' + encodeURIComponent(subject)
+      + '&body=' + encodeURIComponent(bodyLines.join('\n'));
+
+    window.location.href = mailto;
+  });
+</script>
+</body>
+</html>
