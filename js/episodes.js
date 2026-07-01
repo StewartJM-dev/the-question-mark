@@ -1,34 +1,37 @@
 /* =========================================================
    The Question Mark Podcast — episode feed loader
    =========================================================
-   Episodes are read from data/episodes.json — a plain JSON
-   file kept in this repo, refreshed automatically every few
-   hours by a GitHub Action (.github/workflows/update-episodes.yml)
+   Primary source: data/episodes.json — a plain JSON file kept
+   in this repo. It's meant to be refreshed automatically every
+   few hours by a GitHub Action (.github/workflows/update-episodes.yml)
    that fetches PodPoint's RSS feed server-side and commits the
-   result.
+   result. That file avoids CORS entirely (same-origin) and
+   doesn't depend on any third-party proxy.
 
-   Why not fetch the RSS feed directly in the browser? PodPoint's
-   feed doesn't send CORS headers, so a browser can't read it
-   cross-domain without going through a third-party CORS proxy —
-   and free public proxies are rate-limited and unreliable
-   (confirmed firsthand: the one this site used before got rate
-   limited and started failing silently). Reading a same-origin
-   JSON file avoids that entirely — no proxy, no CORS, no flaky
-   third party in the loop.
+   NOTE: as of this version, that GitHub Action hasn't been added
+   yet — pushing files into .github/workflows/ requires a token
+   with "workflow" scope, which the one used to build this didn't
+   have. Add it manually via the GitHub web UI, or hand over a
+   token with that scope, then trigger it once from the repo's
+   Actions tab so data/episodes.json gets created.
 
-   To manually refresh right now instead of waiting for the
-   schedule: GitHub repo → Actions tab → "Update episode feed" →
-   Run workflow.
+   Until that file exists, this script falls back automatically to
+   fetching the RSS feed live in the browser via corsproxy.io (a
+   free CORS proxy that explicitly supports github.io origins).
+   That fallback works today with no further setup, but like any
+   free third-party proxy it isn't guaranteed reliable long-term —
+   the static-JSON path above is the sturdier fix once it's wired up.
    ========================================================= */
 
 var EPISODES_JSON_URL = "data/episodes.json";
+var PODCAST_RSS_URL = "https://podpoint.com/feed/12205"; // LWBC Let's Connect channel feed (PodPoint)
+var CORS_PROXY = "https://corsproxy.io/?url=";
 
 // NOTE: this feed currently returns ALL episodes of the "LWBC Let's Connect"
 // channel, not just The Question Mark. "The Question Mark" is a series
 // inside that channel, not its own top-level PodPoint show — so Pastor
 // Purdy's Sunday sermons will show up here too unless PodPoint offers a
-// series-only feed URL. Worth asking Gordon about a dedicated channel,
-// or filtering here client-side (see FILTER_SERIES_TITLE below).
+// series-only feed URL.
 var FILTER_SERIES_TITLE = ""; // e.g. "The Question Mark" — leave blank to show everything in the feed
 
 function loadEpisodes(opts) {
@@ -37,32 +40,69 @@ function loadEpisodes(opts) {
 
   fetch(EPISODES_JSON_URL, { cache: "no-store" })
     .then(function (res) {
-      if (!res.ok) throw new Error("episodes.json request failed: " + res.status);
+      if (!res.ok) throw new Error("no static feed yet: " + res.status);
       return res.json();
     })
     .then(function (data) {
-      var episodes = (data && data.episodes) || [];
+      renderList(target, (data && data.episodes) || [], opts, false);
+    })
+    .catch(function () {
+      loadEpisodesLive(target, opts);
+    });
+}
 
-      if (FILTER_SERIES_TITLE) {
-        episodes = episodes.filter(function (ep) {
-          return (ep.category || "").trim().toLowerCase() === FILTER_SERIES_TITLE.toLowerCase();
-        });
-      }
+function loadEpisodesLive(target, opts) {
+  var fetchUrl = CORS_PROXY + encodeURIComponent(PODCAST_RSS_URL);
 
-      if (opts.limit) episodes = episodes.slice(0, opts.limit);
+  fetch(fetchUrl)
+    .then(function (res) {
+      if (!res.ok) throw new Error("Feed request failed: " + res.status);
+      return res.text();
+    })
+    .then(function (xmlText) {
+      var parser = new DOMParser();
+      var xml = parser.parseFromString(xmlText, "application/xml");
+      if (xml.querySelector("parsererror")) throw new Error("Could not parse RSS feed");
 
-      if (!episodes.length) {
-        target.innerHTML = '<li class="feed-status">No episodes found in the feed yet.</li>';
-        return;
-      }
+      var items = Array.prototype.slice.call(xml.querySelectorAll("item"));
+      var episodes = items.map(function (item) {
+        return {
+          title: textOf(item, "title") || "Untitled episode",
+          link: textOf(item, "link") || "",
+          pubDate: textOf(item, "pubDate") || "",
+          description: stripHtml(textOf(item, "description") || ""),
+          image: findImage(item),
+        };
+      });
 
-      target.innerHTML = episodes.map(renderEpisode).join("");
+      renderList(target, episodes, opts, true);
     })
     .catch(function (err) {
       console.error(err);
       target.innerHTML =
         '<li class="feed-status">Episodes couldn\u2019t be loaded right now. Check back soon.</li>';
     });
+}
+
+function renderList(target, episodes, opts, isLiveFallback) {
+  if (FILTER_SERIES_TITLE) {
+    episodes = episodes.filter(function (ep) {
+      return (ep.category || "").trim().toLowerCase() === FILTER_SERIES_TITLE.toLowerCase();
+    });
+  }
+
+  if (opts.limit) episodes = episodes.slice(0, opts.limit);
+
+  if (!episodes.length) {
+    target.innerHTML = '<li class="feed-status">No episodes found in the feed yet.</li>';
+    return;
+  }
+
+  target.innerHTML = episodes.map(renderEpisode).join("");
+
+  if (isLiveFallback) {
+    console.info("Episodes loaded via live CORS-proxied fetch (data/episodes.json not found yet).");
+  }
 }
 
 function renderEpisode(ep) {
@@ -98,11 +138,7 @@ function renderEpisode(ep) {
    tile — a soft radial gradient with a thin ring and a tilted
    line, echoing (without copying) the circular flourish and
    cross in the show's real logo. Deterministic: the same
-   episode title always produces the same graphic, so artwork
-   stays stable across visits without needing to store anything.
-   Not a substitute for real episode art — just a graceful
-   fallback so the black background always has something to
-   make the graphics "pop" against, per the brief.
+   episode title always produces the same graphic.
    ========================================================= */
 
 var ART_PALETTES = [
@@ -143,11 +179,36 @@ function generateArt(title) {
   );
 }
 
+function textOf(item, tag) {
+  var el = item.querySelector(tag);
+  return el ? el.textContent.trim() : "";
+}
+
+function findImage(item) {
+  var itunesImage = item.getElementsByTagNameNS("*", "image")[0];
+  if (itunesImage && itunesImage.getAttribute("href")) {
+    return itunesImage.getAttribute("href");
+  }
+  var mediaThumb = item.getElementsByTagNameNS("*", "thumbnail")[0];
+  if (mediaThumb && mediaThumb.getAttribute("url")) {
+    return mediaThumb.getAttribute("url");
+  }
+  var enclosure = item.querySelector("enclosure[type^='image']");
+  if (enclosure) return enclosure.getAttribute("url");
+  return null;
+}
+
 function formatDate(dateStr) {
   if (!dateStr) return "";
   var d = new Date(dateStr);
   if (isNaN(d.getTime())) return dateStr;
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+}
+
+function stripHtml(str) {
+  var div = document.createElement("div");
+  div.innerHTML = str;
+  return (div.textContent || div.innerText || "").trim();
 }
 
 function escapeHtml(str) {
