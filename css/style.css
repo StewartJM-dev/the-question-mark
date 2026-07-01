@@ -196,16 +196,14 @@ nav.primary-nav a[aria-current="page"] {
 }
 
 .hero-marks .hm-1 { top: -16%; right: -3%;  font-size: 280px; opacity: 0.14; transform: rotate(-4deg); }
-.hero-marks .hm-2 { top: 4%;   right: 26%;  font-size: 92px;  opacity: 0.11; transform: rotate(9deg); }
-.hero-marks .hm-3 { top: 40%;  right: 4%;   font-size: 60px;  opacity: 0.10; transform: rotate(-11deg); }
-.hero-marks .hm-4 { top: -2%;  right: 46%;  font-size: 42px;  opacity: 0.09; transform: rotate(15deg); }
-.hero-marks .hm-5 { top: 54%;  right: 34%;  font-size: 34px;  opacity: 0.08; transform: rotate(-7deg); }
+.hero-marks .hm-2 { top: 46%;  left: -6%;   font-size: 190px; opacity: 0.12; transform: rotate(7deg); }
+.hero-marks .hm-3 { top: -10%; left: 34%;   font-size: 130px; opacity: 0.10; transform: rotate(-13deg); }
+.hero-marks .hm-4 { top: 58%;  right: 14%;  font-size: 110px; opacity: 0.10; transform: rotate(10deg); }
 
 .hero-marks.compact .hm-1 { font-size: 150px; }
-.hero-marks.compact .hm-2 { font-size: 56px; }
-.hero-marks.compact .hm-3 { font-size: 38px; }
-.hero-marks.compact .hm-4 { font-size: 28px; }
-.hero-marks.compact .hm-5 { font-size: 22px; }
+.hero-marks.compact .hm-2 { font-size: 104px; }
+.hero-marks.compact .hm-3 { font-size: 72px; }
+.hero-marks.compact .hm-4 { font-size: 60px; }
 
 .hero-brand {
   position: relative;
