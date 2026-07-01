@@ -27,12 +27,54 @@ var EPISODES_JSON_URL = "data/episodes.json";
 var PODCAST_RSS_URL = "https://podpoint.com/feed/12205"; // LWBC Let's Connect channel feed (PodPoint)
 var CORS_PROXY = "https://corsproxy.io/?url=";
 
-// NOTE: this feed currently returns ALL episodes of the "LWBC Let's Connect"
-// channel, not just The Question Mark. "The Question Mark" is a series
-// inside that channel, not its own top-level PodPoint show — so Pastor
-// Purdy's Sunday sermons will show up here too unless PodPoint offers a
-// series-only feed URL.
-var FILTER_SERIES_TITLE = ""; // e.g. "The Question Mark" — leave blank to show everything in the feed
+/* =========================================================
+   Filtering to Question Mark episodes only
+   =========================================================
+   The feed above is the whole "LWBC Let's Connect" channel —
+   Pastor Purdy's sermons are mixed in with Gordon's Question
+   Mark episodes. PodPoint's series pages don't expose a
+   series-specific feed (confirmed: the "Raw XML Feed" link on
+   the Question Mark series page just points back to this same
+   channel feed), so filtering happens here instead, two ways:
+
+   1. KNOWN_TITLES — a frozen list of existing Question Mark
+      episode titles. These never change, so this list never
+      needs updating.
+   2. FUTURE_PREFIX — going forward, Gordon titles every new
+      Question Mark episode starting with this exact text.
+      Anything with this prefix is picked up automatically —
+      no list maintenance required for new episodes.
+
+   A given episode shows up here if EITHER condition matches.
+   ========================================================= */
+
+var FILTER_ENABLED = true;
+
+var FUTURE_PREFIX = "Question Mark: ";
+
+var KNOWN_TITLES = [
+  "Growing Or Going Through The Motions",
+  "Are You Willing To Serve Jesus",
+  "What Cant God Do?",
+  "What Does Christmas Mean To You?",
+  "Who Are You?"
+  // TODO: add the rest of the series list here once confirmed —
+  // titles below "Who Are You?" on the series page weren't visible
+  // in the screenshot this list was built from.
+];
+
+function normalizeTitle(str) {
+  return (str || "").trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+var KNOWN_TITLES_NORMALIZED = KNOWN_TITLES.map(normalizeTitle);
+
+function isQuestionMarkEpisode(title) {
+  var norm = normalizeTitle(title);
+  if (KNOWN_TITLES_NORMALIZED.indexOf(norm) !== -1) return true;
+  if (normalizeTitle(title).indexOf(normalizeTitle(FUTURE_PREFIX)) === 0) return true;
+  return false;
+}
 
 function loadEpisodes(opts) {
   var target = document.querySelector(opts.target);
@@ -85,9 +127,9 @@ function loadEpisodesLive(target, opts) {
 }
 
 function renderList(target, episodes, opts, isLiveFallback) {
-  if (FILTER_SERIES_TITLE) {
+  if (FILTER_ENABLED) {
     episodes = episodes.filter(function (ep) {
-      return (ep.category || "").trim().toLowerCase() === FILTER_SERIES_TITLE.toLowerCase();
+      return isQuestionMarkEpisode(ep.title);
     });
   }
 
@@ -97,6 +139,7 @@ function renderList(target, episodes, opts, isLiveFallback) {
     target.innerHTML = '<li class="feed-status">No episodes found in the feed yet.</li>';
     return;
   }
+
 
   target.innerHTML = episodes.map(renderEpisode).join("");
 
