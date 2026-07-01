@@ -77,24 +77,21 @@ function isQuestionMarkEpisode(title) {
   return false;
 }
 
-function loadEpisodes(opts) {
-  var target = document.querySelector(opts.target);
-  if (!target) return;
-
+function fetchQuestionMarkEpisodes(callback) {
   fetch(EPISODES_JSON_URL, { cache: "no-store" })
     .then(function (res) {
       if (!res.ok) throw new Error("no static feed yet: " + res.status);
       return res.json();
     })
     .then(function (data) {
-      renderList(target, (data && data.episodes) || [], opts, false);
+      callback(filterEpisodes((data && data.episodes) || []), null);
     })
     .catch(function () {
-      loadEpisodesLive(target, opts);
+      fetchQuestionMarkEpisodesLive(callback);
     });
 }
 
-function loadEpisodesLive(target, opts) {
+function fetchQuestionMarkEpisodesLive(callback) {
   var fetchUrl = CORS_PROXY + encodeURIComponent(PODCAST_RSS_URL);
 
   fetch(fetchUrl)
@@ -118,22 +115,48 @@ function loadEpisodesLive(target, opts) {
         };
       });
 
-      renderList(target, episodes, opts, true);
+      callback(filterEpisodes(episodes), null);
     })
     .catch(function (err) {
       console.error(err);
-      target.innerHTML =
-        '<li class="feed-status">Episodes couldn\u2019t be loaded right now. Check back soon.</li>';
+      callback([], err);
     });
 }
 
-function renderList(target, episodes, opts, isLiveFallback) {
-  if (FILTER_ENABLED) {
-    episodes = episodes.filter(function (ep) {
-      return isQuestionMarkEpisode(ep.title);
-    });
-  }
+function filterEpisodes(episodes) {
+  if (!FILTER_ENABLED) return episodes;
+  return episodes.filter(function (ep) {
+    return isQuestionMarkEpisode(ep.title);
+  });
+}
 
+function loadEpisodes(opts) {
+  var target = document.querySelector(opts.target);
+  if (!target) return;
+
+  fetchQuestionMarkEpisodes(function (episodes) {
+    renderList(target, episodes, opts);
+  });
+}
+
+/* Points a link (e.g. the homepage "Latest Episode" tile) at the actual
+   newest Question Mark episode's own page, instead of the internal
+   episode-list page — falls back to the link's existing href (set in
+   HTML) if the feed can't be reached, so it's never left broken. */
+function setLatestEpisodeLink(selector) {
+  var el = document.querySelector(selector);
+  if (!el) return;
+
+  fetchQuestionMarkEpisodes(function (episodes) {
+    if (episodes.length && episodes[0].link) {
+      el.setAttribute("href", episodes[0].link);
+      el.setAttribute("target", "_blank");
+      el.setAttribute("rel", "noopener");
+    }
+  });
+}
+
+function renderList(target, episodes, opts) {
   if (opts.limit) episodes = episodes.slice(0, opts.limit);
 
   if (!episodes.length) {
@@ -141,12 +164,7 @@ function renderList(target, episodes, opts, isLiveFallback) {
     return;
   }
 
-
   target.innerHTML = episodes.map(renderEpisode).join("");
-
-  if (isLiveFallback) {
-    console.info("Episodes loaded via live CORS-proxied fetch (data/episodes.json not found yet).");
-  }
 }
 
 function renderEpisode(ep) {
