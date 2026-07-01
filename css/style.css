@@ -112,12 +112,12 @@ img { max-width: 100%; display: block; }
 .footer-badge {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 .footer-badge img {
-  width: 34px;
-  height: 34px;
-  border-radius: 5px;
+  width: 52px;
+  height: 52px;
+  border-radius: 6px;
   vertical-align: middle;
 }
 
@@ -207,9 +207,9 @@ nav.primary-nav a[aria-current="page"] {
 
 .hero-brand {
   position: relative;
-  width: 148px;
-  height: 148px;
-  border-radius: 12px;
+  width: 168px;
+  height: 168px;
+  border-radius: 14px;
   overflow: hidden;
   margin-bottom: 26px;
   box-shadow: 0 0 0 1px var(--hairline), 0 16px 40px rgba(0,0,0,0.6);
