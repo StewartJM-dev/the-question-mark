@@ -423,7 +423,9 @@ form.question-form {
   border: 1px solid var(--accent-blue-line);
 }
 
-.platform-list a {
+.platform-list a,
+.platform-list .platform-copy,
+.platform-list .platform-unavailable {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -433,14 +435,27 @@ form.question-form {
   text-decoration: none;
   font-family: var(--font-display);
   font-size: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  cursor: pointer;
 }
 
-.platform-list a:hover { background: var(--bg-raised); }
+.platform-list a:hover,
+.platform-list .platform-copy:hover { background: var(--bg-raised); }
 
 .platform-list .go {
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--ink-faint);
+}
+
+.platform-list .platform-unavailable {
+  color: var(--ink-faint);
+  cursor: default;
+}
+.platform-list .platform-unavailable .go {
+  font-style: italic;
 }
 
 /* ---------- Footer ---------- */
