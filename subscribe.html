@@ -39,17 +39,30 @@
   <div class="wrap">
 
     <!--
-      PLACEHOLDER LINKS — replace href="#" with the real show links once
-      Gordon has them (Apple Podcasts / Spotify links are generated once
-      the show is submitted to each directory via the PodPoint RSS feed).
+      Apple Podcasts and Amazon Music are real, verified links to the
+      "LWBC Let's Connect" show (confirmed to exist via search). Spotify
+      and YouTube are NOT confirmed to have a listing for this show —
+      rather than guess at a URL and risk sending listeners somewhere
+      wrong, these stay marked "Not yet available" until Gordon confirms
+      real links (or that the show isn't distributed there).
+
+      IMPORTANT: subscribing via any of these platform links subscribes
+      to the entire "LWBC Let's Connect" channel — Pastor Purdy's sermons
+      included — since Apple/Spotify/Amazon only host at the channel
+      level, not per-series. The title-based filtering this site does
+      only works on this site; it can't travel into a listener's podcast
+      app. Worth deciding with Gordon whether that's acceptable or if
+      Question Mark needs to become its own top-level PodPoint show.
     -->
     <ul class="platform-list">
-      <li><a href="#">Apple Podcasts <span class="go">Open &rarr;</span></a></li>
-      <li><a href="#">Spotify <span class="go">Open &rarr;</span></a></li>
-      <li><a href="#">YouTube <span class="go">Open &rarr;</span></a></li>
-      <li><a href="#">Amazon Music <span class="go">Open &rarr;</span></a></li>
-      <li><a href="#" id="rss-link">RSS Feed <span class="go">Copy link &rarr;</span></a></li>
+      <li><a href="https://podcasts.apple.com/us/podcast/lwbc-lets-connect/id1790852629" target="_blank" rel="noopener">Apple Podcasts <span class="go">Open &rarr;</span></a></li>
+      <li><span class="platform-unavailable">Spotify <span class="go">Not yet available</span></span></li>
+      <li><span class="platform-unavailable">YouTube <span class="go">Not yet available</span></span></li>
+      <li><a href="https://music.amazon.com/podcasts/5901f79d-be4a-4436-af4f-00e7e34cf9bd/lwbc-let's-connect" target="_blank" rel="noopener">Amazon Music <span class="go">Open &rarr;</span></a></li>
+      <li><button type="button" class="platform-copy" id="rss-link">RSS Feed <span class="go" id="rss-link-status">Copy link &rarr;</span></button></li>
     </ul>
+
+    <p class="form-note">Subscribing on any of these follows the full LWBC Let&rsquo;s Connect channel, not just Question Mark episodes &mdash; the same way listener podcast apps work generally. This site&rsquo;s own Episodes page is the only place that shows Question Mark episodes exclusively.</p>
 
   </div>
 </section>
@@ -69,11 +82,35 @@
 
 <script src="js/episodes.js"></script>
 <script>
-  // Points the RSS link at the same feed used to build the episode list.
-  var rssLink = document.getElementById('rss-link');
-  if (rssLink && typeof PODCAST_RSS_URL !== 'undefined' && PODCAST_RSS_URL) {
-    rssLink.setAttribute('href', PODCAST_RSS_URL);
-  }
+  var rssBtn = document.getElementById('rss-link');
+  var rssStatus = document.getElementById('rss-link-status');
+
+  rssBtn.addEventListener('click', function () {
+    var url = (typeof PODCAST_RSS_URL !== 'undefined' && PODCAST_RSS_URL) || '';
+    if (!url) return;
+
+    function showCopied() {
+      rssStatus.textContent = 'Copied!';
+      setTimeout(function () {
+        rssStatus.textContent = 'Copy link \u2192';
+      }, 2000);
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(showCopied);
+    } else {
+      // Fallback for older browsers without the Clipboard API.
+      var temp = document.createElement('textarea');
+      temp.value = url;
+      temp.style.position = 'fixed';
+      temp.style.opacity = '0';
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+      showCopied();
+    }
+  });
 </script>
 </body>
 </html>
