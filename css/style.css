@@ -523,10 +523,14 @@ form.question-form {
 
 .banner-image {
   line-height: 0;
+  overflow: hidden;
+  height: clamp(90px, 37.5vw, 440px);
 }
 .banner-image img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   display: block;
 }
 
