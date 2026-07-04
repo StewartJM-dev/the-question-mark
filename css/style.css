@@ -192,7 +192,6 @@ nav.primary-nav a[aria-current="page"] {
   font-size: clamp(28px, 5vw, 40px);
   line-height: 1.15;
   margin: 8px 0 0;
-  max-width: 16ch;
   color: var(--ink);
 }
 
