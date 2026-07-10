@@ -523,7 +523,7 @@ form.question-form {
 .banner-image {
   line-height: 0;
   overflow: hidden;
-  height: clamp(90px, 41.6vw, 680px);
+  height: clamp(90px, 50vw, 680px);
 }
 .banner-image img {
   width: 100%;
