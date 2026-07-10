@@ -40,17 +40,19 @@ var CORS_PROXY = "https://corsproxy.io/?url=";
    1. KNOWN_TITLES — a frozen list of existing Question Mark
       episode titles. These never change, so this list never
       needs updating.
-   2. FUTURE_PREFIX — going forward, Gordon titles every new
-      Question Mark episode starting with this exact text.
-      Anything with this prefix is picked up automatically —
-      no list maintenance required for new episodes.
+   2. A forgiving "starts with Question Mark" check — going
+      forward, any episode titled starting with those two words
+      gets picked up automatically, regardless of what
+      punctuation follows (colon, dash, em dash, etc.). This was
+      originally a strict "Question Mark: " match, but the very
+      first real episode after that convention was set used a
+      dash instead of a colon and got missed — so the check is
+      now punctuation-agnostic on purpose.
 
    A given episode shows up here if EITHER condition matches.
    ========================================================= */
 
 var FILTER_ENABLED = true;
-
-var FUTURE_PREFIX = "Question Mark: ";
 
 var KNOWN_TITLES = [
   "Growing Or Going Through The Motions",
@@ -61,7 +63,8 @@ var KNOWN_TITLES = [
   "How Important Is Prayer",
   "Do You Know Jesus?",
   "The Question Mark Promo",
-  "The Question We're Afraid To Ask"
+  "The Question We're Afraid To Ask",
+  "Question Mark - Our Freedom Wasn't Free - And Neither Was Our Salvation"
 ];
 
 function normalizeTitle(str) {
@@ -73,7 +76,7 @@ var KNOWN_TITLES_NORMALIZED = KNOWN_TITLES.map(normalizeTitle);
 function isQuestionMarkEpisode(title) {
   var norm = normalizeTitle(title);
   if (KNOWN_TITLES_NORMALIZED.indexOf(norm) !== -1) return true;
-  if (normalizeTitle(title).indexOf(normalizeTitle(FUTURE_PREFIX)) === 0) return true;
+  if (/^question mark\b/.test(norm)) return true;
   return false;
 }
 
