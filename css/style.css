@@ -261,7 +261,12 @@ section h2 {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
+.episode-list li { margin: 0; }
+.episode-list .featured-player { margin-top: 0; }
 
 .episode {
   display: grid;
