@@ -143,73 +143,6 @@ function loadEpisodes(opts) {
   });
 }
 
-/* Renders a large, prominent "Latest Episode" card — big art, big play
-   button — directly playable via the same mini-player as the Episodes
-   list. Falls back to a plain link to the PodPoint episode page if no
-   audio file could be found for some reason. */
-function renderFeaturedLatestEpisode(selector) {
-  var container = document.querySelector(selector);
-  if (!container) return;
-
-  fetchQuestionMarkEpisodes(function (episodes) {
-    if (!episodes.length) {
-      container.innerHTML = '<p class="feed-status">No episodes found in the feed yet.</p>';
-      return;
-    }
-
-    var ep = episodes[0];
-    var title = ep.title || "Untitled episode";
-    var pubDate = ep.pubDate || "";
-    var description = ep.description || "";
-    var image = ep.image || null;
-    var audio = ep.audio || "";
-
-    var artInner = image
-      ? '<img src="' + escapeAttr(image) + '" alt="" loading="lazy">'
-      : generateArt(title);
-
-    if (audio) {
-      container.innerHTML =
-        '<div class="featured-player episode-playable" data-audio="' + escapeAttr(audio) + '" ' +
-          'data-title="' + escapeAttr(title) + '" data-art="' + escapeAttr(image || "") + '" ' +
-          'role="button" tabindex="0" aria-label="Play latest episode: ' + escapeAttr(title) + '">' +
-          '<div class="fp-art">' + artInner +
-            '<span class="episode-play-icon fp-play-icon" aria-hidden="true">&#9658;</span>' +
-          '</div>' +
-          '<div class="fp-info">' +
-            '<span class="fp-date">' + formatDate(pubDate) + '</span>' +
-            '<h2 class="fp-title">' + escapeHtml(title) + '</h2>' +
-            '<p class="fp-desc">' + escapeHtml(description) + '</p>' +
-            '<span class="fp-cta">&#9658; Play Episode</span>' +
-          '</div>' +
-        '</div>';
-    } else {
-      var link = ep.link || "#";
-      container.innerHTML =
-        '<a class="featured-player" href="' + escapeAttr(link) + '" target="_blank" rel="noopener">' +
-          '<div class="fp-art">' + artInner + '</div>' +
-          '<div class="fp-info">' +
-            '<span class="fp-date">' + formatDate(pubDate) + '</span>' +
-            '<h2 class="fp-title">' + escapeHtml(title) + '</h2>' +
-            '<p class="fp-desc">' + escapeHtml(description) + '</p>' +
-            '<span class="fp-cta">Listen on PodPoint &rarr;</span>' +
-          '</div>' +
-        '</a>';
-    }
-  });
-}
-
-function renderList(target, episodes, opts) {
-  if (opts.limit) episodes = episodes.slice(0, opts.limit);
-
-  if (!episodes.length) {
-    target.innerHTML = '<li class="feed-status">No episodes found in the feed yet.</li>';
-    return;
-  }
-
-  target.innerHTML = episodes.map(renderEpisode).join("");
-}
-
 function renderEpisode(ep) {
   var title = ep.title || "Untitled episode";
   var link = ep.link || "#";
@@ -226,17 +159,18 @@ function renderEpisode(ep) {
     // Playable inline via the site's own mini-player — no navigating away.
     return (
       '<li>' +
-        '<div class="episode episode-playable" data-audio="' + escapeAttr(audio) + '" ' +
+        '<div class="featured-player episode-playable" data-audio="' + escapeAttr(audio) + '" ' +
           'data-title="' + escapeAttr(title) + '" data-art="' + escapeAttr(image || "") + '" ' +
           'role="button" tabindex="0" aria-label="Play ' + escapeAttr(title) + '">' +
-          '<span class="episode-art">' + artInner +
-            '<span class="episode-play-icon" aria-hidden="true">&#9658;</span>' +
-          '</span>' +
-          '<span>' +
-            '<span class="episode-date">' + formatDate(pubDate) + '</span>' +
-            '<span class="episode-title">' + escapeHtml(title) + '</span>' +
-            '<p class="episode-blurb">' + escapeHtml(description) + '</p>' +
-          '</span>' +
+          '<div class="fp-art">' + artInner +
+            '<span class="episode-play-icon fp-play-icon" aria-hidden="true">&#9658;</span>' +
+          '</div>' +
+          '<div class="fp-info">' +
+            '<span class="fp-date">' + formatDate(pubDate) + '</span>' +
+            '<h2 class="fp-title">' + escapeHtml(title) + '</h2>' +
+            '<p class="fp-desc">' + escapeHtml(description) + '</p>' +
+            '<span class="fp-cta">&#9658; Play Episode</span>' +
+          '</div>' +
         '</div>' +
       '</li>'
     );
@@ -245,16 +179,28 @@ function renderEpisode(ep) {
   // No playable audio found for this one — fall back to the PodPoint page.
   return (
     '<li>' +
-      '<a class="episode" href="' + escapeAttr(link) + '" target="_blank" rel="noopener">' +
-        '<span class="episode-art">' + artInner + '</span>' +
-        '<span>' +
-          '<span class="episode-date">' + formatDate(pubDate) + '</span>' +
-          '<span class="episode-title">' + escapeHtml(title) + '</span>' +
-          '<p class="episode-blurb">' + escapeHtml(description) + '</p>' +
-        '</span>' +
+      '<a class="featured-player" href="' + escapeAttr(link) + '" target="_blank" rel="noopener">' +
+        '<div class="fp-art">' + artInner + '</div>' +
+        '<div class="fp-info">' +
+          '<span class="fp-date">' + formatDate(pubDate) + '</span>' +
+          '<h2 class="fp-title">' + escapeHtml(title) + '</h2>' +
+          '<p class="fp-desc">' + escapeHtml(description) + '</p>' +
+          '<span class="fp-cta">Listen on PodPoint &rarr;</span>' +
+        '</div>' +
       '</a>' +
     '</li>'
   );
+}
+
+function renderList(target, episodes, opts) {
+  if (opts.limit) episodes = episodes.slice(0, opts.limit);
+
+  if (!episodes.length) {
+    target.innerHTML = '<li class="feed-status">No episodes found in the feed yet.</li>';
+    return;
+  }
+
+  target.innerHTML = episodes.map(renderEpisode).join("");
 }
 
 /* =========================================================
