@@ -46,12 +46,12 @@
         </a>
       </li>
       <li>
-        <a class="tile" id="tile-latest-episode" href="episodes.html?autoplay=latest">
+        <button type="button" class="tile" id="tile-latest-episode">
           <span class="tile-medal">
             <img src="images/tile-latest.jpg" alt="Listen to the latest episode">
           </span>
           <span class="tile-label">Latest Episode</span>
-        </a>
+        </button>
       </li>
       <li>
         <a class="tile" href="episodes.html">
@@ -134,6 +134,8 @@
 
 <script src="js/episodes.js"></script>
 <script>
+  prepareLatestEpisodeButton('#tile-latest-episode');
+
   (function () {
     var modal = document.getElementById('install-modal');
     var openBtn = document.getElementById('tile-download-app');
