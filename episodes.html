@@ -58,8 +58,7 @@
 
 <script src="js/episodes.js"></script>
 <script>
-  var shouldAutoplay = new URLSearchParams(location.search).get('autoplay') === 'latest';
-  loadEpisodes({ target: '#all-episode-list', autoplayFirst: shouldAutoplay });
+  loadEpisodes({ target: '#all-episode-list' });
 </script>
 </body>
 </html>
