@@ -156,6 +156,11 @@ function renderEpisode(ep) {
     : generateArt(title);
 
   if (audio) {
+    var savedProgress = getSavedProgress(audio);
+    var ctaLabel = savedProgress > 3
+      ? "&#9658; Resume at " + formatTime(savedProgress)
+      : "&#9658; Play Episode";
+
     // Playable inline via the site's own mini-player — no navigating away.
     return (
       '<li>' +
@@ -169,7 +174,7 @@ function renderEpisode(ep) {
             '<span class="fp-date">' + formatDate(pubDate) + '</span>' +
             '<h2 class="fp-title">' + escapeHtml(title) + '</h2>' +
             '<p class="fp-desc">' + escapeHtml(description) + '</p>' +
-            '<span class="fp-cta">&#9658; Play Episode</span>' +
+            '<span class="fp-cta">' + ctaLabel + '</span>' +
           '</div>' +
         '</div>' +
       '</li>'
