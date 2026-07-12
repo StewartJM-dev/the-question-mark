@@ -33,7 +33,17 @@
   </div>
 </section>
 
-<!-- 4. Teaser tiles: one per main page -->
+<!-- 4. Featured latest episode — big, playable right here -->
+<section class="latest-feature-section">
+  <div class="wrap">
+    <p class="eyebrow">Latest Episode</p>
+    <div id="latest-episode-feature">
+      <p class="feed-status">Loading the latest episode&hellip;</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Teaser tiles: one per main page -->
 <section class="tile-section">
   <div class="wrap-wide">
     <ul class="tiles">
@@ -46,7 +56,7 @@
         </a>
       </li>
       <li>
-        <a class="tile" id="tile-latest-episode" href="episodes.html">
+        <a class="tile" id="tile-latest-episode" href="#latest-episode-feature">
           <span class="tile-medal">
             <img src="images/tile-latest.jpg" alt="Listen to the latest episode">
           </span>
@@ -89,7 +99,7 @@
   </div>
 </section>
 
-<!-- 5. Footer -->
+<!-- 6. Footer -->
 <footer class="site-footer-image">
   <img src="images/footer.jpg" alt="The Question Mark is part of the LWBC Media Ministry. Built by Covenant Creation &amp; Design. Living Word Baptist Church, 40 Hess Lane, Sweet Valley, PA.">
   <a class="footer-hotspot fh-lwbc-logo" href="https://www.facebook.com/profile.php?id=100064349513334" target="_blank" rel="noopener" aria-label="LWBC Media Ministry on Facebook"></a>
@@ -134,7 +144,7 @@
 
 <script src="js/episodes.js"></script>
 <script>
-  setLatestEpisodeLink('#tile-latest-episode');
+  renderFeaturedLatestEpisode('#latest-episode-feature');
 
   (function () {
     var modal = document.getElementById('install-modal');
