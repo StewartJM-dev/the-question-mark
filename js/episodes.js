@@ -201,14 +201,6 @@ function renderList(target, episodes, opts) {
   }
 
   target.innerHTML = episodes.map(renderEpisode).join("");
-
-  if (opts.autoplayFirst) {
-    var firstRow = target.querySelector(".episode-playable");
-    if (firstRow) {
-      firstRow.scrollIntoView({ behavior: "smooth", block: "center" });
-      playEpisodeFromRow(firstRow);
-    }
-  }
 }
 
 /* =========================================================
@@ -314,15 +306,12 @@ function setActiveRow(row) {
   if (row) row.classList.add("episode-active");
 }
 
-function playEpisodeFromRow(row) {
+function playEpisode(audioUrl, title, art, row) {
   ensureMiniPlayer();
   var audio = miniPlayer.audioEl;
   var player = document.getElementById("mini-player");
-  var audioUrl = row.getAttribute("data-audio");
-  var title = row.getAttribute("data-title");
-  var art = row.getAttribute("data-art");
 
-  if (miniPlayer.row === row) {
+  if (row && miniPlayer.row === row) {
     // Same episode tapped again — just toggle play/pause.
     if (audio.paused) safePlay(audio);
     else audio.pause();
@@ -347,7 +336,47 @@ function playEpisodeFromRow(row) {
     artEl.innerHTML = generateArt(title);
   }
 
-  setActiveRow(row);
+  setActiveRow(row || null);
+}
+
+function playEpisodeFromRow(row) {
+  var audioUrl = row.getAttribute("data-audio");
+  var title = row.getAttribute("data-title");
+  var art = row.getAttribute("data-art");
+  playEpisode(audioUrl, title, art, row);
+}
+
+/* Pre-fetches the latest episode in the background so that, when the
+   homepage's "Latest Episode" tile is actually tapped, playback can start
+   immediately and synchronously within that same click — no fetch delay
+   in between. That matters because browsers only reliably allow audio to
+   autoplay when play() runs as a direct, immediate result of a user
+   gesture; a network request in between (even a fast one) can break that
+   link in stricter browsers like iOS Safari. */
+function prepareLatestEpisodeButton(selector) {
+  var btn = document.querySelector(selector);
+  if (!btn) return;
+
+  var latest = null;
+
+  fetchQuestionMarkEpisodes(function (episodes) {
+    if (episodes.length) latest = episodes[0];
+  });
+
+  btn.addEventListener("click", function () {
+    if (latest && latest.audio) {
+      playEpisode(latest.audio, latest.title, latest.image, null);
+      return;
+    }
+    // Rare case: tapped before the background fetch finished. Fetch now
+    // and play as soon as it resolves — still triggered by this same
+    // click, just with a brief unavoidable delay this one time.
+    fetchQuestionMarkEpisodes(function (episodes) {
+      if (episodes.length && episodes[0].audio) {
+        playEpisode(episodes[0].audio, episodes[0].title, episodes[0].image, null);
+      }
+    });
+  });
 }
 
 document.addEventListener("click", function (e) {
