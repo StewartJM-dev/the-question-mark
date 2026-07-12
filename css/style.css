@@ -803,18 +803,24 @@ form.question-form {
   bottom: 0;
   z-index: 90;
   display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 16px;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 16px 12px;
   background: var(--bg-raised);
   border-top: 1px solid var(--accent-blue-line);
   box-shadow: 0 -8px 24px rgba(0,0,0,0.4);
 }
 .mini-player[hidden] { display: none; }
 
+.mp-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .mp-art {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 4px;
   overflow: hidden;
   flex-shrink: 0;
@@ -822,7 +828,7 @@ form.question-form {
 }
 .mp-art img, .mp-art svg { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.mp-info {
+.mp-meta {
   flex: 1;
   min-width: 0;
 }
@@ -834,41 +840,138 @@ form.question-form {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-bottom: 6px;
+  margin-bottom: 2px;
 }
 
-.mp-progress {
+.mp-time {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+}
+
+.mp-close {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--hairline);
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 18px;
+  cursor: pointer;
+}
+.mp-close:hover { border-color: var(--accent-blue-line); }
+
+.mp-seek-row { padding: 0 2px; }
+
+.mp-progress-track {
+  position: relative;
+  height: 14px;
+  display: flex;
+  align-items: center;
+}
+.mp-progress-track::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
   height: 3px;
   background: var(--hairline);
   border-radius: 2px;
-  overflow: hidden;
 }
 .mp-progress-bar {
-  height: 100%;
+  position: absolute;
+  left: 0;
+  height: 3px;
   width: 0%;
   background: var(--accent-blue);
+  border-radius: 2px;
+  pointer-events: none;
 }
 
-.mp-toggle, .mp-close {
+.mp-seek {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+.mp-seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+}
+.mp-seek::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: none;
+}
+
+.mp-controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mp-transport {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.mp-toggle {
   flex-shrink: 0;
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   border: 1px solid var(--hairline);
   background: transparent;
   color: var(--ink);
-  font-size: 14px;
+  font-size: 15px;
   cursor: pointer;
 }
-.mp-toggle:hover, .mp-close:hover { border-color: var(--accent-blue-line); }
-.mp-close { font-size: 18px; color: var(--ink-soft); }
+.mp-toggle:hover { border-color: var(--accent-blue-line); }
 
-body.has-mini-player { padding-bottom: 72px; }
+.mp-skip {
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px;
+}
+.mp-skip:hover { color: var(--accent-blue); }
+
+.mp-rate {
+  flex-shrink: 0;
+  border: 1px solid var(--hairline);
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  border-radius: 14px;
+  padding: 5px 10px;
+  cursor: pointer;
+  min-width: 42px;
+}
+.mp-rate:hover { border-color: var(--accent-blue-line); color: var(--ink); }
+
+.mp-controls-spacer { width: 42px; }
+
+body.has-mini-player { padding-bottom: 128px; }
 
 @media (max-width: 480px) {
   .mp-title { font-size: 13px; }
-  .mini-player { padding: 8px 12px; gap: 10px; }
-  body.has-mini-player { padding-bottom: 66px; }
+  .mini-player { padding: 8px 12px 10px; }
+  .mp-transport { gap: 14px; }
+  body.has-mini-player { padding-bottom: 122px; }
 }
 
 /* ---------- Featured latest episode player ---------- */
