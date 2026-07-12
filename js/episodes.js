@@ -213,7 +213,7 @@ function renderList(target, episodes, opts) {
    another row switches to it automatically.
    ========================================================= */
 
-var miniPlayer = { row: null, audioEl: null };
+var miniPlayer = { row: null, audioEl: null, currentUrl: null, pendingResume: 0, lastSavedAt: 0 };
 
 /* Some browsers (especially iOS Safari) block audio.play() if it isn't
    triggered by a direct, immediate user gesture — which can happen even
@@ -282,6 +282,7 @@ function ensureMiniPlayer() {
   });
 
   document.getElementById("mp-close").addEventListener("click", function () {
+    if (miniPlayer.currentUrl) saveProgress(miniPlayer.currentUrl, audio.currentTime);
     audio.pause();
     audio.removeAttribute("src");
     audio.load();
@@ -326,10 +327,19 @@ function ensureMiniPlayer() {
   audio.addEventListener("pause", function () {
     document.getElementById("mp-toggle").innerHTML = "&#9658;";
     if (miniPlayer.row) setRowIcon(miniPlayer.row, false);
+    if (miniPlayer.currentUrl) saveProgress(miniPlayer.currentUrl, audio.currentTime);
   });
 
   audio.addEventListener("loadedmetadata", function () {
     document.getElementById("mp-duration").textContent = formatTime(audio.duration);
+    // Resume where you left off — but not if you'd basically already
+    // finished it (within the last 10 seconds), so a completed episode
+    // starts fresh next time instead of replaying its own ending.
+    var resumeAt = miniPlayer.pendingResume;
+    if (resumeAt && resumeAt > 3 && resumeAt < audio.duration - 10) {
+      audio.currentTime = resumeAt;
+    }
+    miniPlayer.pendingResume = 0;
   });
 
   audio.addEventListener("timeupdate", function () {
@@ -340,13 +350,61 @@ function ensureMiniPlayer() {
       document.getElementById("mp-progress-bar").style.width = pct + "%";
       seek.value = Math.round((audio.currentTime / audio.duration) * 1000);
     }
+    // Save progress every few seconds rather than on every tick.
+    if (miniPlayer.currentUrl && audio.currentTime - (miniPlayer.lastSavedAt || 0) > 4) {
+      saveProgress(miniPlayer.currentUrl, audio.currentTime);
+      miniPlayer.lastSavedAt = audio.currentTime;
+    }
   });
 
   audio.addEventListener("ended", function () {
+    if (miniPlayer.currentUrl) clearProgress(miniPlayer.currentUrl);
     setActiveRow(null);
     el.hidden = true;
     document.body.classList.remove("has-mini-player");
   });
+
+  // Catch the last few seconds of position even if the tab is just
+  // closed outright, not via the player's own close button.
+  window.addEventListener("pagehide", function () {
+    if (miniPlayer.currentUrl && !audio.paused) {
+      saveProgress(miniPlayer.currentUrl, audio.currentTime);
+    }
+  });
+}
+
+/* =========================================================
+   Playback position memory
+   =========================================================
+   Saved in the browser's own local storage, keyed by the
+   episode's actual audio file URL (stable and unique per
+   episode). Nothing is sent anywhere — this stays entirely on
+   the visitor's own device/browser. */
+
+var PROGRESS_KEY_PREFIX = "qm_progress:";
+
+function getSavedProgress(audioUrl) {
+  try {
+    var val = localStorage.getItem(PROGRESS_KEY_PREFIX + audioUrl);
+    return val ? parseFloat(val) : 0;
+  } catch (e) {
+    return 0;
+  }
+}
+
+function saveProgress(audioUrl, time) {
+  try {
+    localStorage.setItem(PROGRESS_KEY_PREFIX + audioUrl, String(time));
+  } catch (e) {
+    // localStorage can be unavailable (private browsing, storage full,
+    // etc.) — resume simply won't work that session, nothing to break.
+  }
+}
+
+function clearProgress(audioUrl) {
+  try {
+    localStorage.removeItem(PROGRESS_KEY_PREFIX + audioUrl);
+  } catch (e) {}
 }
 
 function formatTime(seconds) {
@@ -384,6 +442,9 @@ function playEpisode(audioUrl, title, art, row) {
   }
 
   audio.src = audioUrl;
+  miniPlayer.currentUrl = audioUrl;
+  miniPlayer.pendingResume = getSavedProgress(audioUrl);
+  miniPlayer.lastSavedAt = 0;
   safePlay(audio);
   player.hidden = false;
   document.body.classList.add("has-mini-player");
