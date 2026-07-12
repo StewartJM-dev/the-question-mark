@@ -201,6 +201,14 @@ function renderList(target, episodes, opts) {
   }
 
   target.innerHTML = episodes.map(renderEpisode).join("");
+
+  if (opts.autoplayFirst) {
+    var firstRow = target.querySelector(".episode-playable");
+    if (firstRow) {
+      firstRow.scrollIntoView({ behavior: "smooth", block: "center" });
+      playEpisodeFromRow(firstRow);
+    }
+  }
 }
 
 /* =========================================================
@@ -214,6 +222,21 @@ function renderList(target, episodes, opts) {
    ========================================================= */
 
 var miniPlayer = { row: null, audioEl: null };
+
+/* Some browsers (especially iOS Safari) block audio.play() if it isn't
+   triggered by a direct, immediate user gesture — which can happen even
+   here, since the actual tap happened on the previous page (the homepage
+   tile) before this one loaded. If that happens, play() just quietly
+   fails rather than erroring — the mini-player still shows up ready to
+   go, so one more tap starts it normally. */
+function safePlay(audio) {
+  var p = audio.play();
+  if (p && typeof p.catch === "function") {
+    p.catch(function () {
+      /* Autoplay blocked — player is loaded and visible, ready for a tap. */
+    });
+  }
+}
 
 function ensureMiniPlayer() {
   if (document.getElementById("mini-player")) return;
@@ -239,7 +262,7 @@ function ensureMiniPlayer() {
   miniPlayer.audioEl = audio;
 
   document.getElementById("mp-toggle").addEventListener("click", function () {
-    if (audio.paused) audio.play();
+    if (audio.paused) safePlay(audio);
     else audio.pause();
   });
 
@@ -301,13 +324,13 @@ function playEpisodeFromRow(row) {
 
   if (miniPlayer.row === row) {
     // Same episode tapped again — just toggle play/pause.
-    if (audio.paused) audio.play();
+    if (audio.paused) safePlay(audio);
     else audio.pause();
     return;
   }
 
   audio.src = audioUrl;
-  audio.play();
+  safePlay(audio);
   player.hidden = false;
   document.body.classList.add("has-mini-player");
 
