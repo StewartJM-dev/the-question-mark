@@ -275,6 +275,7 @@ section h2 {
 .episode:first-child { border-top: none; }
 
 .episode-art {
+  position: relative;
   width: 84px;
   height: 84px;
   border-radius: 4px;
@@ -761,3 +762,106 @@ form.question-form {
 .install-steps li { margin-bottom: 10px; }
 .install-steps strong { color: var(--ink); }
 .install-steps[hidden] { display: none; }
+
+/* ---------- Playable episode rows ---------- */
+
+.episode-playable { cursor: pointer; }
+
+.episode-play-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(12, 12, 11, 0.35);
+  color: #fff;
+  font-size: 20px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.episode-playable:hover .episode-play-icon,
+.episode-playable:focus-visible .episode-play-icon,
+.episode-active .episode-play-icon {
+  opacity: 1;
+}
+.episode-active .episode-play-icon {
+  background: rgba(12, 12, 11, 0.55);
+}
+.episode-active .episode-title { color: var(--accent-blue); }
+
+/* ---------- Mini player ---------- */
+
+.mini-player {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--bg-raised);
+  border-top: 1px solid var(--accent-blue-line);
+  box-shadow: 0 -8px 24px rgba(0,0,0,0.4);
+}
+.mini-player[hidden] { display: none; }
+
+.mp-art {
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--bg);
+}
+.mp-art img, .mp-art svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.mp-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.mp-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 6px;
+}
+
+.mp-progress {
+  height: 3px;
+  background: var(--hairline);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.mp-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--accent-blue);
+}
+
+.mp-toggle, .mp-close {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--hairline);
+  background: transparent;
+  color: var(--ink);
+  font-size: 14px;
+  cursor: pointer;
+}
+.mp-toggle:hover, .mp-close:hover { border-color: var(--accent-blue-line); }
+.mp-close { font-size: 18px; color: var(--ink-soft); }
+
+body.has-mini-player { padding-bottom: 72px; }
+
+@media (max-width: 480px) {
+  .mp-title { font-size: 13px; }
+  .mini-player { padding: 8px 12px; gap: 10px; }
+  body.has-mini-player { padding-bottom: 66px; }
+}
