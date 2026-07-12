@@ -31,6 +31,14 @@ def strip_html(text):
     return re.sub(r"\s+", " ", text).strip()
 
 
+def find_audio(item):
+    for enclosure in item.findall("enclosure"):
+        etype = enclosure.get("type", "")
+        if etype.startswith("audio"):
+            return enclosure.get("url")
+    return None
+
+
 def find_image(item):
     itunes_image = item.find("itunes:image", NS)
     if itunes_image is not None and itunes_image.get("href"):
@@ -72,6 +80,7 @@ def main():
             "pubDate": text_of(item, "pubDate") or "",
             "description": strip_html(text_of(item, "description")),
             "image": find_image(item),
+            "audio": find_audio(item),
         })
 
     # Make sure the data/ directory exists — git doesn't track empty
