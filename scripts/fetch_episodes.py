@@ -7,6 +7,7 @@ directly — same-origin, so no CORS proxy is needed in the browser.
 Run by .github/workflows/update-episodes.yml on a schedule.
 """
 import json
+import os
 import re
 import sys
 import urllib.request
@@ -72,6 +73,10 @@ def main():
             "description": strip_html(text_of(item, "description")),
             "image": find_image(item),
         })
+
+    # Make sure the data/ directory exists — git doesn't track empty
+    # directories, so on a fresh checkout this path may not exist yet.
+    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
 
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump({"episodes": episodes}, f, ensure_ascii=False, indent=2)
