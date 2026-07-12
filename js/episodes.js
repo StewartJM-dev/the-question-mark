@@ -143,19 +143,58 @@ function loadEpisodes(opts) {
   });
 }
 
-/* Points a link (e.g. the homepage "Latest Episode" tile) at the actual
-   newest Question Mark episode's own page, instead of the internal
-   episode-list page — falls back to the link's existing href (set in
-   HTML) if the feed can't be reached, so it's never left broken. */
-function setLatestEpisodeLink(selector) {
-  var el = document.querySelector(selector);
-  if (!el) return;
+/* Renders a large, prominent "Latest Episode" card — big art, big play
+   button — directly playable via the same mini-player as the Episodes
+   list. Falls back to a plain link to the PodPoint episode page if no
+   audio file could be found for some reason. */
+function renderFeaturedLatestEpisode(selector) {
+  var container = document.querySelector(selector);
+  if (!container) return;
 
   fetchQuestionMarkEpisodes(function (episodes) {
-    if (episodes.length && episodes[0].link) {
-      el.setAttribute("href", episodes[0].link);
-      el.setAttribute("target", "_blank");
-      el.setAttribute("rel", "noopener");
+    if (!episodes.length) {
+      container.innerHTML = '<p class="feed-status">No episodes found in the feed yet.</p>';
+      return;
+    }
+
+    var ep = episodes[0];
+    var title = ep.title || "Untitled episode";
+    var pubDate = ep.pubDate || "";
+    var description = ep.description || "";
+    var image = ep.image || null;
+    var audio = ep.audio || "";
+
+    var artInner = image
+      ? '<img src="' + escapeAttr(image) + '" alt="" loading="lazy">'
+      : generateArt(title);
+
+    if (audio) {
+      container.innerHTML =
+        '<div class="featured-player episode-playable" data-audio="' + escapeAttr(audio) + '" ' +
+          'data-title="' + escapeAttr(title) + '" data-art="' + escapeAttr(image || "") + '" ' +
+          'role="button" tabindex="0" aria-label="Play latest episode: ' + escapeAttr(title) + '">' +
+          '<div class="fp-art">' + artInner +
+            '<span class="episode-play-icon fp-play-icon" aria-hidden="true">&#9658;</span>' +
+          '</div>' +
+          '<div class="fp-info">' +
+            '<span class="fp-date">' + formatDate(pubDate) + '</span>' +
+            '<h2 class="fp-title">' + escapeHtml(title) + '</h2>' +
+            '<p class="fp-desc">' + escapeHtml(description) + '</p>' +
+            '<span class="fp-cta">&#9658; Play Episode</span>' +
+          '</div>' +
+        '</div>';
+    } else {
+      var link = ep.link || "#";
+      container.innerHTML =
+        '<a class="featured-player" href="' + escapeAttr(link) + '" target="_blank" rel="noopener">' +
+          '<div class="fp-art">' + artInner + '</div>' +
+          '<div class="fp-info">' +
+            '<span class="fp-date">' + formatDate(pubDate) + '</span>' +
+            '<h2 class="fp-title">' + escapeHtml(title) + '</h2>' +
+            '<p class="fp-desc">' + escapeHtml(description) + '</p>' +
+            '<span class="fp-cta">Listen on PodPoint &rarr;</span>' +
+          '</div>' +
+        '</a>';
     }
   });
 }
