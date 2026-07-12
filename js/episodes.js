@@ -25,7 +25,7 @@
 
 var EPISODES_JSON_URL = "data/episodes.json";
 var PODCAST_RSS_URL = "https://podpoint.com/feed/12205"; // LWBC Let's Connect channel feed (PodPoint)
-var CORS_PROXY = "https://corsproxy.io/?url=";
+var CORS_PROXY = "https://api.codetabs.com/v1/proxy?quest=";
 
 /* =========================================================
    Filtering to Question Mark episodes only
