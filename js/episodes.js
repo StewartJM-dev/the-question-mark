@@ -115,6 +115,7 @@ function fetchQuestionMarkEpisodesLive(callback) {
           pubDate: textOf(item, "pubDate") || "",
           description: stripHtml(textOf(item, "description") || ""),
           image: findImage(item),
+          audio: findAudio(item),
         };
       });
 
@@ -176,15 +177,37 @@ function renderEpisode(ep) {
   var pubDate = ep.pubDate || "";
   var description = ep.description || "";
   var image = ep.image || null;
+  var audio = ep.audio || "";
 
+  var artInner = image
+    ? '<img src="' + escapeAttr(image) + '" alt="" loading="lazy">'
+    : generateArt(title);
+
+  if (audio) {
+    // Playable inline via the site's own mini-player — no navigating away.
+    return (
+      '<li>' +
+        '<div class="episode episode-playable" data-audio="' + escapeAttr(audio) + '" ' +
+          'data-title="' + escapeAttr(title) + '" data-art="' + escapeAttr(image || "") + '" ' +
+          'role="button" tabindex="0" aria-label="Play ' + escapeAttr(title) + '">' +
+          '<span class="episode-art">' + artInner +
+            '<span class="episode-play-icon" aria-hidden="true">&#9658;</span>' +
+          '</span>' +
+          '<span>' +
+            '<span class="episode-date">' + formatDate(pubDate) + '</span>' +
+            '<span class="episode-title">' + escapeHtml(title) + '</span>' +
+            '<p class="episode-blurb">' + escapeHtml(description) + '</p>' +
+          '</span>' +
+        '</div>' +
+      '</li>'
+    );
+  }
+
+  // No playable audio found for this one — fall back to the PodPoint page.
   return (
     '<li>' +
       '<a class="episode" href="' + escapeAttr(link) + '" target="_blank" rel="noopener">' +
-        '<span class="episode-art">' +
-          (image
-            ? '<img src="' + escapeAttr(image) + '" alt="" loading="lazy">'
-            : generateArt(title)) +
-        '</span>' +
+        '<span class="episode-art">' + artInner + '</span>' +
         '<span>' +
           '<span class="episode-date">' + formatDate(pubDate) + '</span>' +
           '<span class="episode-title">' + escapeHtml(title) + '</span>' +
@@ -194,6 +217,145 @@ function renderEpisode(ep) {
     '</li>'
   );
 }
+
+/* =========================================================
+   Mini-player
+   =========================================================
+   A small, persistent player that stays fixed at the bottom of
+   the screen once an episode starts, so people can keep browsing
+   the list without losing playback — no PodPoint redirect, no
+   full-page takeover. Only one episode plays at a time; tapping
+   another row switches to it automatically.
+   ========================================================= */
+
+var miniPlayer = { row: null, audioEl: null };
+
+function ensureMiniPlayer() {
+  if (document.getElementById("mini-player")) return;
+
+  var el = document.createElement("div");
+  el.id = "mini-player";
+  el.className = "mini-player";
+  el.hidden = true;
+  el.innerHTML =
+    '<div class="mp-art" id="mp-art"></div>' +
+    '<div class="mp-info">' +
+      '<div class="mp-title" id="mp-title"></div>' +
+      '<div class="mp-progress"><div class="mp-progress-bar" id="mp-progress-bar"></div></div>' +
+    "</div>" +
+    '<button type="button" class="mp-toggle" id="mp-toggle" aria-label="Play or pause">&#9658;</button>' +
+    '<button type="button" class="mp-close" id="mp-close" aria-label="Close player">&times;</button>';
+  document.body.appendChild(el);
+
+  var audio = document.createElement("audio");
+  audio.id = "mini-player-audio";
+  audio.preload = "none";
+  document.body.appendChild(audio);
+  miniPlayer.audioEl = audio;
+
+  document.getElementById("mp-toggle").addEventListener("click", function () {
+    if (audio.paused) audio.play();
+    else audio.pause();
+  });
+
+  document.getElementById("mp-close").addEventListener("click", function () {
+    audio.pause();
+    audio.removeAttribute("src");
+    audio.load();
+    el.hidden = true;
+    document.body.classList.remove("has-mini-player");
+    setActiveRow(null);
+  });
+
+  audio.addEventListener("play", function () {
+    document.getElementById("mp-toggle").innerHTML = "&#10074;&#10074;";
+    if (miniPlayer.row) setRowIcon(miniPlayer.row, true);
+  });
+
+  audio.addEventListener("pause", function () {
+    document.getElementById("mp-toggle").innerHTML = "&#9658;";
+    if (miniPlayer.row) setRowIcon(miniPlayer.row, false);
+  });
+
+  audio.addEventListener("timeupdate", function () {
+    if (audio.duration) {
+      var pct = (audio.currentTime / audio.duration) * 100;
+      document.getElementById("mp-progress-bar").style.width = pct + "%";
+    }
+  });
+
+  audio.addEventListener("ended", function () {
+    setActiveRow(null);
+    el.hidden = true;
+    document.body.classList.remove("has-mini-player");
+  });
+}
+
+function setRowIcon(row, isPlaying) {
+  var icon = row.querySelector(".episode-play-icon");
+  if (icon) icon.innerHTML = isPlaying ? "&#10074;&#10074;" : "&#9658;";
+}
+
+function setActiveRow(row) {
+  var prev = miniPlayer.row;
+  if (prev && prev !== row) {
+    prev.classList.remove("episode-active");
+    setRowIcon(prev, false);
+  }
+  miniPlayer.row = row;
+  if (row) row.classList.add("episode-active");
+}
+
+function playEpisodeFromRow(row) {
+  ensureMiniPlayer();
+  var audio = miniPlayer.audioEl;
+  var player = document.getElementById("mini-player");
+  var audioUrl = row.getAttribute("data-audio");
+  var title = row.getAttribute("data-title");
+  var art = row.getAttribute("data-art");
+
+  if (miniPlayer.row === row) {
+    // Same episode tapped again — just toggle play/pause.
+    if (audio.paused) audio.play();
+    else audio.pause();
+    return;
+  }
+
+  audio.src = audioUrl;
+  audio.play();
+  player.hidden = false;
+  document.body.classList.add("has-mini-player");
+
+  document.getElementById("mp-title").textContent = title;
+
+  var artEl = document.getElementById("mp-art");
+  artEl.innerHTML = "";
+  if (art) {
+    var img = document.createElement("img");
+    img.src = art;
+    img.alt = "";
+    artEl.appendChild(img);
+  } else {
+    artEl.innerHTML = generateArt(title);
+  }
+
+  setActiveRow(row);
+}
+
+document.addEventListener("click", function (e) {
+  var row = e.target.closest && e.target.closest(".episode-playable");
+  if (!row) return;
+  e.preventDefault();
+  playEpisodeFromRow(row);
+});
+
+document.addEventListener("keydown", function (e) {
+  if (e.key !== "Enter" && e.key !== " ") return;
+  var row = e.target.closest && e.target.closest(".episode-playable");
+  if (!row) return;
+  e.preventDefault();
+  playEpisodeFromRow(row);
+});
 
 /* =========================================================
    Generative cover art
@@ -247,6 +409,12 @@ function generateArt(title) {
 function textOf(item, tag) {
   var el = item.querySelector(tag);
   return el ? el.textContent.trim() : "";
+}
+
+function findAudio(item) {
+  var enclosure = item.querySelector("enclosure[type^='audio']");
+  if (enclosure) return enclosure.getAttribute("url");
+  return null;
 }
 
 function findImage(item) {
