@@ -238,13 +238,31 @@ function ensureMiniPlayer() {
   el.className = "mini-player";
   el.hidden = true;
   el.innerHTML =
-    '<div class="mp-art" id="mp-art"></div>' +
-    '<div class="mp-info">' +
-      '<div class="mp-title" id="mp-title"></div>' +
-      '<div class="mp-progress"><div class="mp-progress-bar" id="mp-progress-bar"></div></div>' +
-    "</div>" +
-    '<button type="button" class="mp-toggle" id="mp-toggle" aria-label="Play or pause">&#9658;</button>' +
-    '<button type="button" class="mp-close" id="mp-close" aria-label="Close player">&times;</button>';
+    '<div class="mp-top">' +
+      '<div class="mp-art" id="mp-art"></div>' +
+      '<div class="mp-meta">' +
+        '<div class="mp-title" id="mp-title"></div>' +
+        '<div class="mp-time">' +
+          '<span id="mp-current">0:00</span> / <span id="mp-duration">&ndash;:&ndash;</span>' +
+        '</div>' +
+      '</div>' +
+      '<button type="button" class="mp-close" id="mp-close" aria-label="Close player">&times;</button>' +
+    '</div>' +
+    '<div class="mp-seek-row">' +
+      '<div class="mp-progress-track" id="mp-progress-track">' +
+        '<div class="mp-progress-bar" id="mp-progress-bar"></div>' +
+        '<input type="range" class="mp-seek" id="mp-seek" min="0" max="1000" value="0" aria-label="Seek">' +
+      '</div>' +
+    '</div>' +
+    '<div class="mp-controls-row">' +
+      '<button type="button" class="mp-rate" id="mp-rate" aria-label="Playback speed">1x</button>' +
+      '<div class="mp-transport">' +
+        '<button type="button" class="mp-skip" id="mp-back15" aria-label="Back 15 seconds">&minus;15</button>' +
+        '<button type="button" class="mp-toggle" id="mp-toggle" aria-label="Play or pause">&#9658;</button>' +
+        '<button type="button" class="mp-skip" id="mp-fwd15" aria-label="Forward 15 seconds">+15</button>' +
+      '</div>' +
+      '<span class="mp-controls-spacer" aria-hidden="true"></span>' +
+    '</div>';
   document.body.appendChild(el);
 
   var audio = document.createElement("audio");
@@ -252,6 +270,11 @@ function ensureMiniPlayer() {
   audio.preload = "none";
   document.body.appendChild(audio);
   miniPlayer.audioEl = audio;
+
+  var seek = document.getElementById("mp-seek");
+  var isSeeking = false;
+  var rates = [1, 1.25, 1.5, 2];
+  var rateIndex = 0;
 
   document.getElementById("mp-toggle").addEventListener("click", function () {
     if (audio.paused) safePlay(audio);
@@ -267,6 +290,34 @@ function ensureMiniPlayer() {
     setActiveRow(null);
   });
 
+  document.getElementById("mp-back15").addEventListener("click", function () {
+    audio.currentTime = Math.max(0, audio.currentTime - 15);
+  });
+
+  document.getElementById("mp-fwd15").addEventListener("click", function () {
+    if (audio.duration) audio.currentTime = Math.min(audio.duration, audio.currentTime + 15);
+    else audio.currentTime += 15;
+  });
+
+  document.getElementById("mp-rate").addEventListener("click", function () {
+    rateIndex = (rateIndex + 1) % rates.length;
+    audio.playbackRate = rates[rateIndex];
+    this.textContent = rates[rateIndex] + "x";
+  });
+
+  seek.addEventListener("pointerdown", function () { isSeeking = true; });
+  seek.addEventListener("input", function () {
+    if (audio.duration) {
+      var target = (seek.value / 1000) * audio.duration;
+      document.getElementById("mp-current").textContent = formatTime(target);
+      document.getElementById("mp-progress-bar").style.width = (seek.value / 10) + "%";
+    }
+  });
+  seek.addEventListener("change", function () {
+    if (audio.duration) audio.currentTime = (seek.value / 1000) * audio.duration;
+    isSeeking = false;
+  });
+
   audio.addEventListener("play", function () {
     document.getElementById("mp-toggle").innerHTML = "&#10074;&#10074;";
     if (miniPlayer.row) setRowIcon(miniPlayer.row, true);
@@ -277,10 +328,17 @@ function ensureMiniPlayer() {
     if (miniPlayer.row) setRowIcon(miniPlayer.row, false);
   });
 
+  audio.addEventListener("loadedmetadata", function () {
+    document.getElementById("mp-duration").textContent = formatTime(audio.duration);
+  });
+
   audio.addEventListener("timeupdate", function () {
+    if (isSeeking) return;
+    document.getElementById("mp-current").textContent = formatTime(audio.currentTime);
     if (audio.duration) {
       var pct = (audio.currentTime / audio.duration) * 100;
       document.getElementById("mp-progress-bar").style.width = pct + "%";
+      seek.value = Math.round((audio.currentTime / audio.duration) * 1000);
     }
   });
 
@@ -289,6 +347,13 @@ function ensureMiniPlayer() {
     el.hidden = true;
     document.body.classList.remove("has-mini-player");
   });
+}
+
+function formatTime(seconds) {
+  if (!isFinite(seconds) || seconds < 0) return "0:00";
+  var m = Math.floor(seconds / 60);
+  var s = Math.floor(seconds % 60);
+  return m + ":" + (s < 10 ? "0" : "") + s;
 }
 
 function setRowIcon(row, isPlaying) {
