@@ -22,8 +22,8 @@ jobs:
         run: |
           git config user.name "question-mark-bot"
           git config user.email "actions@github.com"
-          if ! git diff --quiet -- data/episodes.json; then
-            git add data/episodes.json
+          git add data/episodes.json
+          if ! git diff --cached --quiet; then
             git commit -m "Update episode feed [automated]"
             git push
           else
