@@ -1,6 +1,22 @@
 {
   "episodes": [
     {
+      "title": "The McDowells - Pitsburg, PA",
+      "link": "https://podpoint.com/lwbc-lets-connect/the-mcdowells-pitsburg-pa",
+      "pubDate": "Mon, 13 Jul 2026 01:15:49 +0000",
+      "description": "The McDowells are working to plant a church in the city of Pittsburg, PA",
+      "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/6a01f2e51dfe200b61443136ba6b5e78.png",
+      "audio": "https://media.podpoint.com/download/f569406262f4c23a0c362213180e5f63.mp3"
+    },
+    {
+      "title": "God Never Gives Up",
+      "link": "https://podpoint.com/lwbc-lets-connect/god-never-gives-up",
+      "pubDate": "Mon, 13 Jul 2026 01:11:16 +0000",
+      "description": "",
+      "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/9731bc7fa7836ac4d91e8cca35a7408e.png",
+      "audio": "https://media.podpoint.com/download/6235456089913cab2fb5af38020c26a0.mp3"
+    },
+    {
       "title": "Question Mark - Our Freedom Wasn't Free - And Neither Was Our Salvation",
       "link": "https://podpoint.com/lwbc-lets-connect/question-mark-our-freedom-wasnt-free-and-neither-was-our-salvation",
       "pubDate": "Fri, 10 Jul 2026 03:23:23 +0000",
@@ -783,22 +799,6 @@
       "description": "",
       "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/9fe9b348f222ff1b0fdf4950eed8f73b.jpg",
       "audio": "https://media.podpoint.com/download/229cb07ac2021be36b01fbd4a97603f4.mp3"
-    },
-    {
-      "title": "The Purpose of the Scriptures",
-      "link": "https://podpoint.com/lwbc-lets-connect/the-purpose-of-the-scriptures",
-      "pubDate": "Sun, 11 May 2025 23:11:35 +0000",
-      "description": "",
-      "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/794277669675437dc99f8bebf3db942c.jpg",
-      "audio": "https://media.podpoint.com/download/7fc6558791173e2e37effdf43daf96a0.mp3"
-    },
-    {
-      "title": "Two Godly Mothers",
-      "link": "https://podpoint.com/lwbc-lets-connect/two-godly-mothers",
-      "pubDate": "Sun, 11 May 2025 15:07:55 +0000",
-      "description": "",
-      "image": "https://d2qyh7u0eavo4q.cloudfront.net/podcasts/images/full/8a5aea1b6ffe82a25a08449115e01be1.jpg",
-      "audio": "https://media.podpoint.com/download/362f3e5680993a6ff03ec035689c466c.mp3"
     }
   ]
 }
