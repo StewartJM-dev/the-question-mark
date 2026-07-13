@@ -12,6 +12,7 @@ import re
 import sys
 import urllib.request
 import xml.etree.ElementTree as ET
+from datetime import datetime
 from html import unescape
 
 FEED_URL = "https://podpoint.com/feed/12205"
@@ -88,7 +89,7 @@ def main():
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
 
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
-        json.dump({"episodes": episodes}, f, ensure_ascii=False, indent=2)
+        json.dump({"episodes": episodes, "fetched_at": datetime.utcnow().isoformat() + "Z"}, f, ensure_ascii=False, indent=2)
 
     print(f"Wrote {len(episodes)} episodes to {OUTPUT_PATH}")
 
