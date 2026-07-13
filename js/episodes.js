@@ -24,6 +24,7 @@
    ========================================================= */
 
 var EPISODES_JSON_URL = "data/episodes.json";
+var imageCacheBustValue = String(Date.now());
 var PODCAST_RSS_URL = "https://podpoint.com/feed/12205"; // LWBC Let's Connect channel feed (PodPoint)
 var CORS_PROXY = "https://api.codetabs.com/v1/proxy?quest=";
 
@@ -87,6 +88,7 @@ function fetchQuestionMarkEpisodes(callback) {
       return res.json();
     })
     .then(function (data) {
+      imageCacheBustValue = (data && data.fetched_at) || String(Date.now());
       callback(filterEpisodes((data && data.episodes) || []), null);
     })
     .catch(function () {
@@ -152,7 +154,7 @@ function renderEpisode(ep) {
   var audio = ep.audio || "";
 
   var artInner = image
-    ? '<img src="' + escapeAttr(image) + '" alt="" loading="lazy">'
+    ? '<img src="' + escapeAttr(image + (image.indexOf("?") === -1 ? "?" : "&") + "v=" + encodeURIComponent(imageCacheBustValue)) + '" alt="" loading="lazy">'
     : generateArt(title);
 
   if (audio) {
@@ -460,7 +462,7 @@ function playEpisode(audioUrl, title, art, row) {
   artEl.innerHTML = "";
   if (art) {
     var img = document.createElement("img");
-    img.src = art;
+    img.src = art + (art.indexOf("?") === -1 ? "?" : "&") + "v=" + encodeURIComponent(imageCacheBustValue);
     img.alt = "";
     artEl.appendChild(img);
   } else {
