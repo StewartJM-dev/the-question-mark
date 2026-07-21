@@ -1,6 +1,14 @@
 {
   "episodes": [
     {
+      "title": "God's Purpose",
+      "link": "https://podpoint.com/lwbc-lets-connect/gods-purpose",
+      "pubDate": "Tue, 21 Jul 2026 00:27:07 +0000",
+      "description": "LWBC Revival Meetings with Mark Rogers Family. Special Music and Message.",
+      "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/174d3a6a06938226ae9c60e055a1f574.png",
+      "audio": "https://media.podpoint.com/download/67b680eb61a8af5f1a499d589e477796.mp3"
+    },
+    {
       "title": "Faithfulness",
       "link": "https://podpoint.com/lwbc-lets-connect/faithfulness",
       "pubDate": "Sun, 19 Jul 2026 23:44:47 +0000",
@@ -791,15 +799,7 @@
       "description": "",
       "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/7586e3c9b8fc1e8203efc7ab82ca0808.jpg",
       "audio": "https://media.podpoint.com/download/14de688ff67b746cba5fe71b722ab5fa.mp3"
-    },
-    {
-      "title": "Remember The Sacrifice",
-      "link": "https://podpoint.com/lwbc-lets-connect/remember-the-sacrifice",
-      "pubDate": "Sun, 25 May 2025 23:01:51 +0000",
-      "description": "",
-      "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/b4f36cb3f862417859f6acd3a92f7fad.jpg",
-      "audio": "https://media.podpoint.com/download/584658aaca59dc2ca631329d124a7267.mp3"
     }
   ],
-  "fetched_at": "2026-07-20T19:37:02.675992Z"
+  "fetched_at": "2026-07-21T02:05:35.876654Z"
 }
