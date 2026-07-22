@@ -1,6 +1,14 @@
 {
   "episodes": [
     {
+      "title": "How Not To Make An Idol",
+      "link": "https://podpoint.com/lwbc-lets-connect/how-not-to-make-an-idol",
+      "pubDate": "Wed, 22 Jul 2026 00:45:32 +0000",
+      "description": "This episode is the sermon only for Tuesday, 7/21/2026",
+      "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/408500a6bf8d2fdfabb49a5d42de26cd.png",
+      "audio": "https://media.podpoint.com/download/fbce824c6a3ab4024f0038681693df1c.mp3"
+    },
+    {
       "title": "God's Purpose",
       "link": "https://podpoint.com/lwbc-lets-connect/gods-purpose",
       "pubDate": "Tue, 21 Jul 2026 00:27:07 +0000",
@@ -791,15 +799,7 @@
       "description": "",
       "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/61ef024c5f467cc1bd2455c91ac8c9d3.jpg",
       "audio": "https://media.podpoint.com/download/3cf323ad60d4cfc7be737fe08c4917fd.mp3"
-    },
-    {
-      "title": "Worship At The Table",
-      "link": "https://podpoint.com/lwbc-lets-connect/worship-at-the-table",
-      "pubDate": "Sun, 01 Jun 2025 15:02:53 +0000",
-      "description": "",
-      "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/7586e3c9b8fc1e8203efc7ab82ca0808.jpg",
-      "audio": "https://media.podpoint.com/download/14de688ff67b746cba5fe71b722ab5fa.mp3"
     }
   ],
-  "fetched_at": "2026-07-21T19:10:43.300611Z"
+  "fetched_at": "2026-07-22T02:04:07.525431Z"
 }
