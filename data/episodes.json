@@ -1,6 +1,22 @@
 {
   "episodes": [
     {
+      "title": "Judgement Brings Bitterness and Blessings",
+      "link": "https://podpoint.com/lwbc-lets-connect/judgement-brings-bitterness-and-blessings",
+      "pubDate": "Mon, 03 Aug 2026 11:37:52 +0000",
+      "description": "",
+      "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/176c34f9afcedf60601fe57bbd7c8486.png",
+      "audio": "https://media.podpoint.com/download/fcae71c754b0b75f9f5ba8651bd66022.mp3"
+    },
+    {
+      "title": "Finding God's Way",
+      "link": "https://podpoint.com/lwbc-lets-connect/finding-gods-way",
+      "pubDate": "Sun, 02 Aug 2026 15:26:22 +0000",
+      "description": "",
+      "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/52188461b529e6b04dd0d885962d4c31.png",
+      "audio": "https://media.podpoint.com/download/d2321a6d6bbd782be5fbefb73f176a04.mp3"
+    },
+    {
       "title": "The Same City, Same Sin",
       "link": "https://podpoint.com/lwbc-lets-connect/the-same-city-same-sin",
       "pubDate": "Sun, 26 Jul 2026 16:02:55 +0000",
@@ -783,23 +799,7 @@
       "description": "",
       "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/f899fc2739d8cc6109cf9e2dad6bac09.jpg",
       "audio": "https://media.podpoint.com/download/8d437c74304b3e1283d8e64457ded8a7.mp3"
-    },
-    {
-      "title": "How To Catch A Rat",
-      "link": "https://podpoint.com/lwbc-lets-connect/how-to-catch-a-rat",
-      "pubDate": "Sun, 08 Jun 2025 23:04:58 +0000",
-      "description": "",
-      "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/1fa7843b624ac68e7a6c48f429def941.jpg",
-      "audio": "https://media.podpoint.com/download/a4cd244f1996ba73ccf8380752de2c2d.mp3"
-    },
-    {
-      "title": "Faith Of Our Fathers",
-      "link": "https://podpoint.com/lwbc-lets-connect/faith-of-our-fathers",
-      "pubDate": "Sun, 08 Jun 2025 15:09:35 +0000",
-      "description": "",
-      "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/d9384a0902d873545423fef7386a37b8.jpg",
-      "audio": "https://media.podpoint.com/download/33c6caeb9cdf0a4d69cb2090421218cf.mp3"
     }
   ],
-  "fetched_at": "2026-08-03T09:32:14.652738Z"
+  "fetched_at": "2026-08-03T14:25:41.866518Z"
 }
