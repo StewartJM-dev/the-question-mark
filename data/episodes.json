@@ -1,6 +1,22 @@
 {
   "episodes": [
     {
+      "title": "The Millers",
+      "link": "https://podpoint.com/lwbc-lets-connect/the-millers",
+      "pubDate": "Sun, 13 Sep 2026 23:49:12 +0000",
+      "description": "A Concert",
+      "image": "https://d2qyh7u0eavo4q.cloudfront.net/podcasts/images/full/334418794375e955bd40f03e453cbef6.jpg",
+      "audio": "https://media.podpoint.com/download/ef6b4ac3f5d5e699d85809ffb2cf3371.mp3"
+    },
+    {
+      "title": "Take Off The Old And Put On The New",
+      "link": "https://podpoint.com/lwbc-lets-connect/take-off-the-old-and-put-on-the-new",
+      "pubDate": "Sun, 13 Sep 2026 16:06:05 +0000",
+      "description": "",
+      "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/b303cdf8c0971d3b76911e2d669d2867.png",
+      "audio": "https://media.podpoint.com/download/7b443dc088384c03fc25c2260b722da2.mp3"
+    },
+    {
       "title": "It Is Your Choice",
       "link": "https://podpoint.com/lwbc-lets-connect/it-is-your-choice",
       "pubDate": "Mon, 07 Sep 2026 12:30:46 +0000",
@@ -783,23 +799,7 @@
       "description": "",
       "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/764f78a07246c4302828bb6cbcac9f91.jpg",
       "audio": "https://media.podpoint.com/download/b50bf0f888604dc6b3a0de6ac45a1d6b.mp3"
-    },
-    {
-      "title": "Can God Or God Can",
-      "link": "https://podpoint.com/lwbc-lets-connect/can-god-or-god-can",
-      "pubDate": "Sun, 13 Jul 2025 15:15:59 +0000",
-      "description": "",
-      "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/8a82f036cf643a51585cb61027bb76f0.jpg",
-      "audio": "https://media.podpoint.com/download/3fde882783cdea803144bf9d36e08bbe.mp3"
-    },
-    {
-      "title": "Why We Fight",
-      "link": "https://podpoint.com/lwbc-lets-connect/why-we-fight",
-      "pubDate": "Sun, 06 Jul 2025 23:08:03 +0000",
-      "description": "",
-      "image": "https://d2qyh7u0eavo4q.cloudfront.net/episodes/images/original/ff296dfa2ebb98b666ac031c8f5431e6.jpg",
-      "audio": "https://media.podpoint.com/download/84d8781dc6dac98f314ad14cad4c3adb.mp3"
     }
   ],
-  "fetched_at": "2026-09-14T02:54:49.853461Z"
+  "fetched_at": "2026-09-14T11:29:46.802566Z"
 }
