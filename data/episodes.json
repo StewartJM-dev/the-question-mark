@@ -1,6 +1,14 @@
 {
   "episodes": [
     {
+      "title": "Is God Through With Israel",
+      "link": "https://podpoint.com/lwbc-lets-connect/is-god-through-with-israel",
+      "pubDate": "Sun, 27 Sep 2026 15:47:15 +0000",
+      "description": "",
+      "image": "https://podpoint.s3.us-east-1.amazonaws.com/assets/episodes/images/original/b6beda7b93cc89437dd54f903b2b9184.png",
+      "audio": "https://media.podpoint.com/download/2d20bd52a617215063924df2b05fcc74.mp3"
+    },
+    {
       "title": "Can You Say It?",
       "link": "https://podpoint.com/lwbc-lets-connect/can-you-say-it",
       "pubDate": "Mon, 21 Sep 2026 12:25:37 +0000",
@@ -791,15 +799,7 @@
       "description": "",
       "image": "https://podpoint.s3.us-east-1.amazonaws.com/assets/episodes/images/original/acd65e23f5dd79cb844b379d0e2234d6.jpg",
       "audio": "https://media.podpoint.com/download/79dcbe552cd48fdffa4c087d809e7416.mp3"
-    },
-    {
-      "title": "In The Midst",
-      "link": "https://podpoint.com/lwbc-lets-connect/in-the-midst",
-      "pubDate": "Sun, 20 Jul 2025 23:06:22 +0000",
-      "description": "",
-      "image": "https://podpoint.s3.us-east-1.amazonaws.com/assets/podcasts/images/full/334418794375e955bd40f03e453cbef6.jpg",
-      "audio": "https://media.podpoint.com/download/53d9c20f35b0f86f9a606307c0df6c32.mp3"
     }
   ],
-  "fetched_at": "2026-09-28T03:05:33.879744Z"
+  "fetched_at": "2026-09-28T12:39:02.346066Z"
 }
