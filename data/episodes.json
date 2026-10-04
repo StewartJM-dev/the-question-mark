@@ -11,7 +11,7 @@
     {
       "title": "Can You Say It?",
       "link": "https://podpoint.com/lwbc-lets-connect/can-you-say-it",
-      "pubDate": "Mon, 21 Sep 2026 12:25:37 +0000",
+      "pubDate": "Mon, 21 Sep 2026 12:25:00 +0000",
       "description": "Sermon from LWBC Let's Connect",
       "image": null,
       "audio": "https://podpoint.com/download/b0e7d75a80abf7f02ad3fdef8b026196.mp3"
@@ -27,7 +27,7 @@
     {
       "title": "The Millers",
       "link": "https://podpoint.com/lwbc-lets-connect/the-millers",
-      "pubDate": "Sun, 13 Sep 2026 23:49:12 +0000",
+      "pubDate": "Sun, 13 Sep 2026 23:49:00 +0000",
       "description": "A Concert",
       "image": null,
       "audio": "https://podpoint.com/download/ef6b4ac3f5d5e699d85809ffb2cf3371.mp3"
@@ -43,7 +43,7 @@
     {
       "title": "It Is Your Choice",
       "link": "https://podpoint.com/lwbc-lets-connect/it-is-your-choice",
-      "pubDate": "Mon, 07 Sep 2026 12:30:46 +0000",
+      "pubDate": "Mon, 07 Sep 2026 12:30:00 +0000",
       "description": "Sermon from LWBC Let's Connect",
       "image": null,
       "audio": "https://podpoint.com/download/b1442cdd5f7b6042701c555e973b62e9.mp3"
@@ -107,7 +107,7 @@
     {
       "title": "The Same City, Same Sin",
       "link": "https://podpoint.com/lwbc-lets-connect/the-same-city-same-sin",
-      "pubDate": "Sun, 26 Jul 2026 16:02:55 +0000",
+      "pubDate": "Sun, 26 Jul 2026 16:02:00 +0000",
       "description": "Sermon from LWBC Let's Connect",
       "image": null,
       "audio": "https://podpoint.com/download/dfcf0d6eb9950a595cc573e691ecc945.mp3"
@@ -219,7 +219,7 @@
     {
       "title": "A Worsening World",
       "link": "https://podpoint.com/lwbc-lets-connect/a-worsening-world",
-      "pubDate": "Mon, 01 Jun 2026 13:33:49 +0000",
+      "pubDate": "Mon, 01 Jun 2026 13:33:00 +0000",
       "description": "Sermon from LWBC Let's Connect",
       "image": null,
       "audio": "https://podpoint.com/download/ecfe5432d7b114cd8bd3341abc544e9d.mp3"
@@ -323,7 +323,7 @@
     {
       "title": "Resurrection Sunday",
       "link": "https://podpoint.com/lwbc-lets-connect/resurrection-sunday",
-      "pubDate": "Mon, 06 Apr 2026 12:09:15 +0000",
+      "pubDate": "Mon, 06 Apr 2026 12:09:00 +0000",
       "description": "Sunday Evening Service",
       "image": null,
       "audio": "https://podpoint.com/download/7e03e07d2d5e2ca418b2e448518425ed.mp3"
@@ -801,5 +801,5 @@
       "audio": "https://podpoint.com/download/79dcbe552cd48fdffa4c087d809e7416.mp3"
     }
   ],
-  "fetched_at": "2026-10-04T11:39:24.087101Z"
+  "fetched_at": "2026-10-04T16:18:05.641695Z"
 }
