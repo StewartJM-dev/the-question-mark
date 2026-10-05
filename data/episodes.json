@@ -1,6 +1,14 @@
 {
   "episodes": [
     {
+      "title": "Israel A Nation Reborn  (Part 2)",
+      "link": "https://podpoint.com/lwbc-lets-connect/israel-a-nation-reborn-part-2",
+      "pubDate": "Mon, 05 Oct 2026 13:01:11 +0000",
+      "description": "Sermon from LWBC Let's Connect",
+      "image": null,
+      "audio": "https://podpoint.com/download/media/2026/922d1b50da277db252f0faf00bbabb36.mp3"
+    },
+    {
       "title": "Is God Through With Israel",
       "link": "https://podpoint.com/lwbc-lets-connect/is-god-through-with-israel",
       "pubDate": "Sun, 27 Sep 2026 15:47:15 +0000",
@@ -791,15 +799,7 @@
       "description": "A night of music with our special guests the Keystone State Quartet",
       "image": null,
       "audio": "https://podpoint.com/download/e8df7c41ab78c470df469c3cb474e846.mp3"
-    },
-    {
-      "title": "Can God Really Keep You Saved",
-      "link": "https://podpoint.com/lwbc-lets-connect/can-god-really-keep-you-saved",
-      "pubDate": "Sun, 27 Jul 2025 15:18:22 +0000",
-      "description": "Sermon from LWBC Let's Connect",
-      "image": null,
-      "audio": "https://podpoint.com/download/79dcbe552cd48fdffa4c087d809e7416.mp3"
     }
   ],
-  "fetched_at": "2026-10-05T03:34:13.107148Z"
+  "fetched_at": "2026-10-05T13:19:37.611575Z"
 }
