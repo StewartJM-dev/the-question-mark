@@ -1,6 +1,14 @@
 {
   "episodes": [
     {
+      "title": "A Changed Life",
+      "link": "https://podpoint.com/lwbc-lets-connect/a-changed-life",
+      "pubDate": "Tue, 06 Oct 2026 01:10:16 +0000",
+      "description": "Sermon from LWBC Let's Connect",
+      "image": null,
+      "audio": "https://podpoint.com/download/media/2026/260c84b4665ef9e50525abc2ec8463a9.mp3"
+    },
+    {
       "title": "Israel A Nation Reborn  (Part 2)",
       "link": "https://podpoint.com/lwbc-lets-connect/israel-a-nation-reborn-part-2",
       "pubDate": "Mon, 05 Oct 2026 13:01:11 +0000",
@@ -791,15 +799,7 @@
       "description": "Sermon from LWBC Let's Connect",
       "image": null,
       "audio": "https://podpoint.com/download/1ab45ec54d1527d83076e9f2deebe783.mp3"
-    },
-    {
-      "title": "Keystone State Quartet",
-      "link": "https://podpoint.com/lwbc-lets-connect/keystone-state-quartet",
-      "pubDate": "Sun, 27 Jul 2025 23:16:44 +0000",
-      "description": "A night of music with our special guests the Keystone State Quartet",
-      "image": null,
-      "audio": "https://podpoint.com/download/e8df7c41ab78c470df469c3cb474e846.mp3"
     }
   ],
-  "fetched_at": "2026-10-05T23:35:32.558361Z"
+  "fetched_at": "2026-10-06T04:22:16.523981Z"
 }
