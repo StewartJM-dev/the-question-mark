@@ -1,6 +1,14 @@
 {
   "episodes": [
     {
+      "title": "Why Israel (Part 3)",
+      "link": "https://podpoint.com/lwbc-lets-connect/why-israel",
+      "pubDate": "Mon, 12 Oct 2026 11:20:13 +0000",
+      "description": "Sermon from LWBC Let's Connect",
+      "image": null,
+      "audio": "https://podpoint.com/download/media/2026/511d0c3c1ef5d5e21a48d454fa17b548.mp3"
+    },
+    {
       "title": "A Changed Life",
       "link": "https://podpoint.com/lwbc-lets-connect/a-changed-life",
       "pubDate": "Tue, 06 Oct 2026 01:10:16 +0000",
@@ -791,15 +799,7 @@
       "description": "Sermon from LWBC Let's Connect",
       "image": null,
       "audio": "https://podpoint.com/download/8c30943ffb1a869ff00fee655b0a032a.mp3"
-    },
-    {
-      "title": "Can God Really Meet Your Needs",
-      "link": "https://podpoint.com/lwbc-lets-connect/can-god-really-meet-your-needs",
-      "pubDate": "Sun, 03 Aug 2025 15:14:46 +0000",
-      "description": "Sermon from LWBC Let's Connect",
-      "image": null,
-      "audio": "https://podpoint.com/download/1ab45ec54d1527d83076e9f2deebe783.mp3"
     }
   ],
-  "fetched_at": "2026-10-12T03:49:57.721196Z"
+  "fetched_at": "2026-10-12T14:09:26.667960Z"
 }
