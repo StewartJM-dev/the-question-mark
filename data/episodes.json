@@ -1,6 +1,14 @@
 {
   "episodes": [
     {
+      "title": "From Abraham To The Millennium",
+      "link": "https://podpoint.com/lwbc-lets-connect/from-abraham-to-the-millennium",
+      "pubDate": "Mon, 19 Oct 2026 11:15:51 +0000",
+      "description": "Sermon from LWBC Let's Connect",
+      "image": null,
+      "audio": "https://podpoint.com/download/media/2026/4799fd371d49ef2c16f53f9856a3f45f.mp3"
+    },
+    {
       "title": "Why Israel (Part 3)",
       "link": "https://podpoint.com/lwbc-lets-connect/why-israel",
       "pubDate": "Mon, 12 Oct 2026 11:20:13 +0000",
@@ -791,15 +799,7 @@
       "description": "Sermon from LWBC Let's Connect",
       "image": null,
       "audio": "https://podpoint.com/download/d690ac1548825d15ec635d36a7f7a181.mp3"
-    },
-    {
-      "title": "Fulfilled Prophecy Happening Now",
-      "link": "https://podpoint.com/lwbc-lets-connect/fulfilled-prophecy-happening-now",
-      "pubDate": "Sun, 03 Aug 2025 23:05:13 +0000",
-      "description": "Sermon from LWBC Let's Connect",
-      "image": null,
-      "audio": "https://podpoint.com/download/8c30943ffb1a869ff00fee655b0a032a.mp3"
     }
   ],
-  "fetched_at": "2026-10-19T02:50:14.757620Z"
+  "fetched_at": "2026-10-19T11:50:17.256855Z"
 }
