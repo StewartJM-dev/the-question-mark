@@ -1,6 +1,14 @@
 {
   "episodes": [
     {
+      "title": "What's Your Identity",
+      "link": "https://podpoint.com/lwbc-lets-connect/whats-your-identity",
+      "pubDate": "Mon, 26 Oct 2026 11:33:05 +0000",
+      "description": "Sermon from LWBC Let's Connect",
+      "image": null,
+      "audio": "https://podpoint.com/download/media/2026/403f71507a4734a4f227c1166e89e138.mp3"
+    },
+    {
       "title": "From Abraham To The Millennium",
       "link": "https://podpoint.com/lwbc-lets-connect/from-abraham-to-the-millennium",
       "pubDate": "Mon, 19 Oct 2026 11:15:51 +0000",
@@ -791,15 +799,7 @@
       "description": "Sermon from LWBC Let's Connect",
       "image": null,
       "audio": "https://podpoint.com/download/1372946a9cf7c194bc19aea00bc67335.mp3"
-    },
-    {
-      "title": "Can God Really Use Your Life",
-      "link": "https://podpoint.com/lwbc-lets-connect/can-god-really-use-your-life",
-      "pubDate": "Sun, 10 Aug 2025 15:09:14 +0000",
-      "description": "Sermon from LWBC Let's Connect",
-      "image": null,
-      "audio": "https://podpoint.com/download/d690ac1548825d15ec635d36a7f7a181.mp3"
     }
   ],
-  "fetched_at": "2026-10-26T02:44:41.817781Z"
+  "fetched_at": "2026-10-26T12:04:50.490889Z"
 }
