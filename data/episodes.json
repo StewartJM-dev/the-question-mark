@@ -9,6 +9,14 @@
       "audio": "https://podpoint.com/download/media/2026/403f71507a4734a4f227c1166e89e138.mp3"
     },
     {
+      "title": "LWBC Sunday Evening Worship",
+      "link": "https://podpoint.com/lwbc-lets-connect/timeline-1",
+      "pubDate": "Sun, 25 Oct 2026 22:00:00 +0000",
+      "description": "Sermon from LWBC Let's Connect",
+      "image": null,
+      "audio": "https://podpoint.com/download/media/2026/2c1d9163f5af3f500813f46a7bb8eada.mp3"
+    },
+    {
       "title": "From Abraham To The Millennium",
       "link": "https://podpoint.com/lwbc-lets-connect/from-abraham-to-the-millennium",
       "pubDate": "Mon, 19 Oct 2026 11:15:51 +0000",
@@ -791,15 +799,7 @@
       "description": "Sermon from LWBC Let's Connect",
       "image": null,
       "audio": "https://podpoint.com/download/40027ec850a9e4ab50a486d805f493fb.mp3"
-    },
-    {
-      "title": "Rapture Sure",
-      "link": "https://podpoint.com/lwbc-lets-connect/rapture-sure",
-      "pubDate": "Sun, 10 Aug 2025 23:04:02 +0000",
-      "description": "Sermon from LWBC Let's Connect",
-      "image": null,
-      "audio": "https://podpoint.com/download/1372946a9cf7c194bc19aea00bc67335.mp3"
     }
   ],
-  "fetched_at": "2026-10-27T11:25:32.567271Z"
+  "fetched_at": "2026-10-27T17:14:28.232358Z"
 }
