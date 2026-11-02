@@ -1,6 +1,22 @@
 {
   "episodes": [
     {
+      "title": "When God Hits The Pause Button",
+      "link": "https://podpoint.com/lwbc-lets-connect/when-god-hits-the-pause-button",
+      "pubDate": "Mon, 02 Nov 2026 12:06:36 +0000",
+      "description": "Sermon from LWBC Let's Connect",
+      "image": null,
+      "audio": "https://podpoint.com/download/media/2026/18f85366c1cab3d14a4cc1c8dc8ebb2a.mp3"
+    },
+    {
+      "title": "Sunday Evening Worship",
+      "link": "https://podpoint.com/lwbc-lets-connect/sunday-evening-worship",
+      "pubDate": "Mon, 02 Nov 2026 12:06:35 +0000",
+      "description": "Sermon from LWBC Let's Connect",
+      "image": null,
+      "audio": "https://podpoint.com/download/media/2026/0d58c62d1ec9257686f7eb343a22b1a4.mp3"
+    },
+    {
       "title": "What's Your Identity",
       "link": "https://podpoint.com/lwbc-lets-connect/whats-your-identity",
       "pubDate": "Mon, 26 Oct 2026 11:33:05 +0000",
@@ -783,23 +799,7 @@
       "description": "Sermon from LWBC Let's Connect",
       "image": null,
       "audio": "https://podpoint.com/download/e64cd7ed02fdcc48148faba10d24ff3e.mp3"
-    },
-    {
-      "title": "Begin With Prayer",
-      "link": "https://podpoint.com/lwbc-lets-connect/begin-with-prayer",
-      "pubDate": "Sun, 24 Aug 2025 15:05:09 +0000",
-      "description": "Sermon from LWBC Let's Connect",
-      "image": null,
-      "audio": "https://podpoint.com/download/75c10e2e48a15f045d5f19b94e9b2ce9.mp3"
-    },
-    {
-      "title": "Jesus Mission",
-      "link": "https://podpoint.com/lwbc-lets-connect/jesus-mission",
-      "pubDate": "Sun, 17 Aug 2025 15:05:07 +0000",
-      "description": "Sermon from LWBC Let's Connect",
-      "image": null,
-      "audio": "https://podpoint.com/download/40027ec850a9e4ab50a486d805f493fb.mp3"
     }
   ],
-  "fetched_at": "2026-11-02T03:54:18.383549Z"
+  "fetched_at": "2026-11-02T14:30:37.991764Z"
 }
