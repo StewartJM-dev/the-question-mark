@@ -1,6 +1,14 @@
 {
   "episodes": [
     {
+      "title": "When God Hits The Play Button",
+      "link": "https://podpoint.com/lwbc-lets-connect/when-god-hits-the-play-button",
+      "pubDate": "Mon, 16 Nov 2026 14:25:02 +0000",
+      "description": "Sermon from LWBC Let's Connect",
+      "image": null,
+      "audio": "https://podpoint.com/download/media/2026/bb2cae5742a71e751a58de94ff30bb2e.mp3"
+    },
+    {
       "title": "When God Hits The Pause Button",
       "link": "https://podpoint.com/lwbc-lets-connect/when-god-hits-the-pause-button",
       "pubDate": "Mon, 02 Nov 2026 12:06:36 +0000",
@@ -791,15 +799,7 @@
       "description": "Sermon from LWBC Let's Connect",
       "image": null,
       "audio": "https://podpoint.com/download/bdf48a92b5e7bee15f867c0195543f6d.mp3"
-    },
-    {
-      "title": "This Book",
-      "link": "https://podpoint.com/lwbc-lets-connect/this-book",
-      "pubDate": "Sun, 24 Aug 2025 23:17:28 +0000",
-      "description": "Sermon from LWBC Let's Connect",
-      "image": null,
-      "audio": "https://podpoint.com/download/e64cd7ed02fdcc48148faba10d24ff3e.mp3"
     }
   ],
-  "fetched_at": "2026-11-16T04:20:37.036026Z"
+  "fetched_at": "2026-11-16T14:31:11.596808Z"
 }
