@@ -1,6 +1,14 @@
 {
   "episodes": [
     {
+      "title": "Love - The Foundation of Discipleship",
+      "link": "https://podpoint.com/lwbc-lets-connect/love",
+      "pubDate": "Sun, 22 Nov 2026 15:00:00 +0000",
+      "description": "Sermon from LWBC Let's Connect",
+      "image": null,
+      "audio": "https://podpoint.com/download/media/2026/7842c19f7aecb04035fa285a3cae156c.mp3"
+    },
+    {
       "title": "When God Hits The Play Button",
       "link": "https://podpoint.com/lwbc-lets-connect/when-god-hits-the-play-button",
       "pubDate": "Mon, 16 Nov 2026 14:25:02 +0000",
@@ -791,15 +799,7 @@
       "description": "Sermon from LWBC Let's Connect",
       "image": null,
       "audio": "https://podpoint.com/download/fd4085a4917eb3142a638327857aa84f.mp3"
-    },
-    {
-      "title": "Listen",
-      "link": "https://podpoint.com/lwbc-lets-connect/listen",
-      "pubDate": "Sun, 31 Aug 2025 15:10:44 +0000",
-      "description": "Sermon from LWBC Let's Connect",
-      "image": null,
-      "audio": "https://podpoint.com/download/bdf48a92b5e7bee15f867c0195543f6d.mp3"
     }
   ],
-  "fetched_at": "2026-11-23T05:15:10.540772Z"
+  "fetched_at": "2026-11-23T17:05:57.599913Z"
 }
